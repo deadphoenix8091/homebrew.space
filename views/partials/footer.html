@@ -1,0 +1,33 @@
+<footer class="mdl-mega-footer">
+    <div class="mdl-mega-footer__middle-section">
+
+        <div class="mdl-mega-footer__drop-down-section">
+            <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
+            <h1 class="mdl-mega-footer__heading">Categories</h1>
+            <ul class="mdl-mega-footer__link-list">
+                {% for currentCategory in categories %}
+                <li><a href="{{ currentCategory.url|raw }}">{{ currentCategory.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="mdl-mega-footer__drop-down-section">
+            <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
+            <h1 class="mdl-mega-footer__heading">Developer Section</h1>
+            <ul class="mdl-mega-footer__link-list">
+                <li><a href="#">Guidelines</a></li>
+                <li><a href="/submit">Submit Application</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="mdl-mega-footer__bottom-section">
+        <div class="mdl-logo">HomebrewDB</div>
+        <ul class="mdl-mega-footer__link-list">
+            <li><a href="/credits">Credits</a></li>
+            <li><a href="/contact">Contact us</a></li>
+        </ul>
+    </div>
+
+</footer>

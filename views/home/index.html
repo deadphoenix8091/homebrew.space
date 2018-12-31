@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h4>Featured HomeBrew Applications:</h4>
+<div class="project-list">
+{% for i in 1..10 %}
+    <div class="mdl-card mdl-shadow--2dp project">
+        <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">App {{ i }}</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+            <div class="qr-wrap">
+                <img src="/storage/9445026.qr.png"/>
+            </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Mauris sagittis pellentesque lacus eleifend lacinia...</p>
+
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                To Project Page
+            </a>
+        </div>
+        <div class="mdl-card__menu">
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                QR BTN
+            </button>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+{% endblock %}
