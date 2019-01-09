@@ -1,0 +1,91 @@
+.mdl-layout-title a {
+  color: white;
+  text-decoration: none;
+}
+
+.page-content {
+  padding: 1em;
+  padding-top: 0;
+}
+
+.mdl-button--file input {
+  cursor: pointer;
+  height: 100%;
+  right: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 300px;
+  z-index: 4;
+}
+
+.mdl-textfield--file .mdl-textfield__input {
+  box-sizing: border-box;
+  width: calc(100% - 32px);
+}
+.mdl-textfield--file .mdl-button--file {
+  right: 0;
+}
+
+.project-list {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.project-list .project {
+  width: calc((100% / 4) - 20px);
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+@media (max-width: 1620px) {
+  .project-list .project {
+    width: calc((100% / 3) - 20px);
+  }
+}
+
+@media (max-width: 1280px) {
+  .project-list .project {
+    width: calc((100% / 2) - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .project-list .project {
+    width: calc((100%) - 20px);
+  }
+}
+
+.submission-form {
+  margin: 1em auto 0 auto;
+  width: 80%;
+}
+
+@media (max-width: 1280px) {
+  .submission-form {
+    width: 100%;
+  }
+}
+
+form .mdl-textfield,
+form .mdl-checkbox {
+  display: block;
+  width: 100%;
+}
+
+.mdl-textfield--file {
+  cursor: pointer;
+}
+.mdl-textfield--file input[type="text"] {
+  pointer-events: none;
+}
+
+.qr-wrap img {
+  width: 100%;
+  max-width: 400px;
+}

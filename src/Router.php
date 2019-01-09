@@ -16,24 +16,39 @@ class Router {
     }
 
     private function getController() {
-        $page = isset($_GET['page']) ? $_GET['page'] : '';
+        $page = isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : '';
         $targetRoute = ['Home', 'index'];
 
-        $urlSegments = explode('/', $page);
+        $urlSegments = array_values(array_filter(explode('/', $page)));
 
         if (count($urlSegments) > 0) {
             switch ($urlSegments[0]) {
                 case 'submit':
                     $targetRoute = ['Submission', 'form'];
                     break;
-                case 'releases':
+                case 'releases5551':
                     $targetRoute = ['ReleasesCronjob', 'index'];
+                    break;
+                case 'category':
+                    $targetRoute = ['Home', 'category'];
+                    break;
+                case 'dl':
+                    $targetRoute = ['Download', 'index'];
+                    break;
+                case 'credits':
+                    $targetRoute = ['Home', 'credits'];
+                    break;
+                case 'rules-guidelines':
+                    $targetRoute = ['Home', 'rules'];
                     break;
                 case 'tips':
                     if (SessionManager::IsLoggedin()) {
                         $targetRoute = ['Tips', 'index'];
                         break;
                     }
+                default:
+                    http_response_code(404);
+                    exit;
             }
         }
 

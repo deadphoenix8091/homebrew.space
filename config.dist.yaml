@@ -1,0 +1,8 @@
+database:
+  host: localhost
+  username: tinydb
+  password: password
+  database: tinydb
+web:
+  domain: localhost
+  use_ssl: true

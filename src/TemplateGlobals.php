@@ -4,7 +4,7 @@ namespace HomebrewDB;
 
 class TemplateGlobals {
     private static function FetchCategories() {
-        $stmt = DatabaseManager::Prepare('select * from categories');
+        $stmt = DatabaseManager::Prepare('select categories.*, count(*) as "count" from categories join app_categories on (app_categories.category_id = categories.category_id) group by categories.category_id');
         $stmt->execute();
         $allCategories = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 

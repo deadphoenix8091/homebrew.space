@@ -11,7 +11,11 @@ class DatabaseManager {
     }
 
     private static function Connect() {
-        self::$connection = new \PDO('mysql:dbname=homebrewdb;host=localhost', 'root', '');
+        $database = ConfigManager::GetConfiguration('database.database');
+        $host = ConfigManager::GetConfiguration('database.host');
+        $username = ConfigManager::GetConfiguration('database.username');
+        $password = ConfigManager::GetConfiguration('database.password');
+        self::$connection = new \PDO('mysql:dbname=' . $database . ';host=' . $host, $username, $password);
 
         //@TODO: Add database error handling
     }

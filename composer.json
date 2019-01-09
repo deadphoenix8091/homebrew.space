@@ -2,7 +2,8 @@
     "name": "deadphoenix/web",
     "type": "project",
     "require": {
-        "twig/twig": "^2.0"
+        "twig/twig": "^2.0",
+        "symfony/yaml": "^4.2"
     },
     "autoload": {
         "psr-4": {

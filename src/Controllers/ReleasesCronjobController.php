@@ -4,11 +4,16 @@ namespace HomebrewDB\Controllers;
 
 use HomebrewDB\BaseController;
 use HomebrewDB\CIAParser;
+use HomebrewDB\DatabaseManager;
 
 class ReleasesCronjobController extends BaseController {
-    public function getReleases($githubRepoUrl) {
+    public function updateReleases($appId, $githubRepoUrl) {
         $urlParts = parse_url($githubRepoUrl);
-        $githubReleasesApiUrl = 'https://api.github.com/repos' . $urlParts['path'] . '/releases';
+        $pathSegments = array_filter(explode('/', $urlParts['path']));
+        if (count($pathSegments) < 2) {
+            return false;
+        }
+        $githubReleasesApiUrl = 'https://api.github.com/repos/' . $pathSegments[1] . '/' . $pathSegments[2] . '/releases?access_token=c6c62bdb3bcba406a29a44a1a690bd879b669e92';
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch,CURLOPT_USERAGENT,'deadphoenix8091');
@@ -17,43 +22,53 @@ class ReleasesCronjobController extends BaseController {
         curl_close($ch);
         $releasesData = json_decode($result, true);
 
-        $releasesCount = count($releasesData);
-
-        if ($releasesCount == 0) {
+        if (isset($releasesData['message'])) {
             return false; //No releases found.
         }
-
         foreach($releasesData as $currentRelease) {
-            $preRelease = $currentRelease['prerelease'];
+            $stmt = DatabaseManager::Prepare('select count(1) as found_releases from app_releases where id = :release_id');
+            $stmt->bindValue('release_id', $currentRelease['id']);
+            $stmt->execute();
+            if (intval($stmt->fetch()['found_releases']) > 0) {
+                continue; //We already got this release, no need to fetch everything again
+            }
 
-            if ($preRelease) continue; //@TODO: Determine weither or not to allow pre-releases???
-
-            $tagName = $currentRelease['tag_name'];
             foreach ($currentRelease['assets'] as $currentAsset) {
                 $lowerFilename = mb_strtolower($currentAsset['name']);
                 if (mb_strpos($lowerFilename, '.cia') == false) continue;
 
-                //We are a cia file... download if doesnt exist :)
-                if (!file_exists('storage/' . $currentAsset['id'] . '.cia')) {
-                    $ciaFileContent = file_get_contents($currentAsset['browser_download_url']);
-                    file_put_contents('storage/' . $currentAsset['id'] . '.cia', $ciaFileContent);
-                    //$ciaMetaData = CIAParser::GetMetadata('storage/' . $currentAsset['id'] . '.cia');
-                    //$this->createQRCode('storage/' . $currentAsset['id'] . '.cia', base64_decode($ciaMetaData['images']['big']), 'storage/' . $currentAsset['id'] . '.qr.png');
-                    $ciaFileContent = '';
-                    die;
-                }
+                $file = tmpfile();
+                $ciaFileContent = file_get_contents($currentAsset['browser_download_url']);
+                fseek($file, 0);
+                fwrite($file, $ciaFileContent, strlen($ciaFileContent));
+                fseek($file, 0);
+                $ciaMetaData = CIAParser::GetMetadata($file);
+                fclose($file);
+                //@TODO: QR Code needs correct download link for current release as fileName
+                $base64QRJpeg = $this->createQRCode('dl/' . $appId . '/latest/' . $currentAsset['name'], base64_decode($ciaMetaData['images']['big']));
+                $ciaFileContent = '';
 
-                $ciaMetaData = CIAParser::GetMetadata('storage/ftpd.cia');
-                $this->createQRCode('storage/' . $currentAsset['id'] . '.cia', base64_decode($ciaMetaData['images']['big']), 'storage/' . $currentAsset['id'] . '.qr.png');
+                $stmt = DatabaseManager::Prepare('insert into app_releases (`id`, `file_name`, `download_url`, `tag_name`, `prerelease`, `name`, `description`, `app_id`, `qr_code`, `created_at`)'.
+                    ' values (:id, :file_name, :download_url, :tag_name, :prerelease, :name, :description, :app_id, :qr_code, :created_at)');
+                $stmt->bindValue('id', $currentRelease['id']);
+                $stmt->bindValue('file_name', $currentAsset['name']);
+                $stmt->bindValue('download_url', $currentAsset['browser_download_url']);
+                $stmt->bindValue('tag_name', $currentRelease['tag_name']);
+                $stmt->bindValue('prerelease', $currentRelease['prerelease']);
+                $stmt->bindValue('app_id', $appId);
+                $stmt->bindValue('qr_code', $base64QRJpeg);
+                $stmt->bindValue('created_at', $currentRelease['created_at']);
+                $stmt->bindValue('name', $ciaMetaData['name']);
+                $stmt->bindValue('description', $ciaMetaData['description']);
+                $stmt->execute();
 
+                break;//Only 1 cia file per release, we just take the first one
             }
         }
-
-        die;
     }
 
-    private function createQRCode($fileName, $imageData, $outputFileName) {
-        $data = 'http://localhost/' . $fileName;
+    private function createQRCode($fileName, $imageData) {
+        $data = 'https://tinydb.eiphax.tech/' . $fileName;
         $size = '200x200';
         $logo = true;
 // Get QR Code image from Google Chart API
@@ -74,19 +89,30 @@ class ReleasesCronjobController extends BaseController {
 
             imagecopyresampled($QR, $logo, $QR_width/3, $QR_height/3, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
         }
-        imagepng($QR, $outputFileName);
+        ob_start ();
+        imagejpeg ($QR);
+        $qrRaw = ob_get_contents ();
+        ob_end_clean ();
         imagedestroy($QR);
+        return base64_encode($qrRaw);
     }
 
     public function indexAction() {
         //$githubUrl = 'https://api.github.com/repos/Steveice10/FBI/releases';
         //$githubUrl = 'https://github.com/KunoichiZ/lumaupdate';
-        $githubUrl = 'https://github.com/FlagBrew/Checkpoint';
+        ini_set('max_execution_time', 0);
+        $stmt = DatabaseManager::Prepare('select * from app');
+        $stmt->execute();
+        $apps = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        $this->getReleases($githubUrl);
+        foreach ($apps as $currentApp) {
+            $this->updateReleases($currentApp['id'], $currentApp['github_url']);
+        }
 
-        header("Content-type: application/json; charset=utf-8");
-        echo json_encode(CIAParser::GetMetadata('FBI.cia'));
+        echo "ok";
         exit;
+        //header("Content-type: application/json; charset=utf-8");
+        //echo json_encode(CIAParser::GetMetadata('FBI.cia'));
+        //exit;
     }
 }

@@ -58,9 +58,7 @@ class CIAParser {
         }
     }
 
-    public static function GetMetadata($filename) {
-        $fileHandle = fopen($filename, 'r');
-
+    public static function GetMetadata($fileHandle) {
         $archiveHeaderSize = unpack('V', fread($fileHandle, 4))[1];
         fseek($fileHandle, 0);
 
@@ -152,7 +150,6 @@ class CIAParser {
                 self::read8x8Tile($bigIcon, $fileHandle, $x * 8, $y * 8);
             }
         }
-        fclose($fileHandle);
 
         ob_start ();
         imagejpeg ($smallIcon);
