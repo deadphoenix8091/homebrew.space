@@ -32,6 +32,9 @@ class Router {
                 case 'category':
                     $targetRoute = ['Home', 'category'];
                     break;
+                case 'search':
+                    $targetRoute = ['Home', 'search'];
+                    break;
                 case 'dl':
                     $targetRoute = ['Download', 'index'];
                     break;

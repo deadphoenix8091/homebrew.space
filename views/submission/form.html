@@ -3,30 +3,31 @@
 
 {% if success == false %}
 {% for error in errors %}
-<p>{{error}}</p>
+<p class="submit-error">{{error}}</p>
 {% endfor %}
+{% elseif success == true %}
+<p class="submit-success">{{message}}</p>
 {% endif %}
 
-<p>Submission form currently disabled. Will be enabled on the 10th of January 2019 at 11pm UTC</p>
-<!--<form name="submission-form" action="/submit" class="submission-form mdl-card mdl-shadow--2dp" method="post">
+<form name="submission-form" action="/submit" class="submission-form mdl-card mdl-shadow--2dp" method="post">
     <div class="mdl-card__title">
         <h2 class="mdl-card__title-text">Submit Application</h2>
     </div>
     <div class="mdl-card__supporting-text">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" id="name" name="name" pattern="^[a-zA-Z0-9 \.]{3,255}$">
+                <input class="mdl-textfield__input" type="text" id="name" name="name" value="{{formData.name}}" pattern="^[a-zA-Z0-9 \.]{3,255}$">
                 <label class="mdl-textfield__label" for="name">Project Name</label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <textarea class="mdl-textfield__input" type="text" rows="5" id="description" name="description"></textarea>
+                <textarea class="mdl-textfield__input" type="text" rows="5" id="description" name="description">{{formData.description}}</textarea>
                 <label class="mdl-textfield__label" for="description">Description</label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" id="author" name="author" pattern="^[a-zA-Z0-9 \.]{3,255}$">
+                <input class="mdl-textfield__input" type="text" id="author" name="author" value="{{formData.author}}" pattern="^[a-zA-Z0-9 \.]{3,255}$">
                 <label class="mdl-textfield__label" for="author">Author</label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" id="github" name="github" pattern="https?://.+">
+                <input class="mdl-textfield__input" type="text" id="github" name="github" value="{{formData.github}}" pattern="https?://.+">
                 <label class="mdl-textfield__label" for="github">Github URL</label>
             </div>
             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="rules-check">
@@ -39,7 +40,7 @@
             Submit
         </a>
     </div>
-</form>-->
+</form>
 
 
 

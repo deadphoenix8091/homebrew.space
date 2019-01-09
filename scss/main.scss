@@ -89,3 +89,19 @@ form .mdl-checkbox {
   width: 100%;
   max-width: 400px;
 }
+
+.submit-error {
+  padding: 1em;
+  margin: 1em;
+  background-color: red;
+  color: white;
+  border-radius: .5em;
+}
+
+.submit-success {
+  padding: 1em;
+  margin: 1em;
+  background-color: limegreen;
+  color: white;
+  border-radius: .5em;
+}

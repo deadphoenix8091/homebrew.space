@@ -13,6 +13,18 @@ if (document.getElementById("icon"))
         }
     };
 
+document.querySelector('input[name="search"]').onkeypress = function(e){
+    if (!e) e = window.event;
+    var keyCode = e.keyCode || e.which;
+    if (keyCode == 13){
+        var searchTerm = document.querySelector('input[name="search"]').value;
+        if (searchTerm.length > 0) {
+            window.location = '/search/' + encodeURI(searchTerm);
+        }
+        return false;
+    }
+};
+
 (function() {
     'use strict';
     var projects = document.querySelectorAll('.project');
@@ -36,4 +48,6 @@ if (document.getElementById("icon"))
         .addEventListener('click', function() {
             dialog.close();
         });
+
+
 }());
