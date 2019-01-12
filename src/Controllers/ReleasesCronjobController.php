@@ -7,7 +7,9 @@ use HomebrewDB\CIAParser;
 use HomebrewDB\DatabaseManager;
 
 class ReleasesCronjobController extends BaseController {
-    public function updateReleases($appId, $githubRepoUrl) {
+    public function updateReleases($app) {
+        $appId = $app['id'];
+        $githubRepoUrl = $app['github_url'];
         $urlParts = parse_url($githubRepoUrl);
         $pathSegments = array_filter(explode('/', $urlParts['path']));
         if (count($pathSegments) < 2) {
@@ -25,6 +27,7 @@ class ReleasesCronjobController extends BaseController {
         if (isset($releasesData['message'])) {
             return false; //No releases found.
         }
+
         foreach($releasesData as $currentRelease) {
             $stmt = DatabaseManager::Prepare('select count(1) as found_releases from app_releases where id = :release_id');
             $stmt->bindValue('release_id', $currentRelease['id']);
@@ -98,16 +101,19 @@ class ReleasesCronjobController extends BaseController {
     }
 
     public function indexAction() {
-        //$githubUrl = 'https://api.github.com/repos/Steveice10/FBI/releases';
-        //$githubUrl = 'https://github.com/KunoichiZ/lumaupdate';
         ini_set('max_execution_time', 0);
-        $stmt = DatabaseManager::Prepare('select * from app');
+        //Get the app/submission that is waiting the longest for a release scan (minimum wait time 1 hour)
+        $stmt = DatabaseManager::Prepare('select * from app where last_release_scan_at is null or last_release_scan_at < DATE_SUB(NOW(), INTERVAL 1 HOUR) order by last_release_scan_at asc limit 1');
         $stmt->execute();
         $apps = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        foreach ($apps as $currentApp) {
-            $this->updateReleases($currentApp['id'], $currentApp['github_url']);
-        }
+        if (count($apps) != 1) { echo "no work"; exit; }
+
+        $stmt = DatabaseManager::Prepare('update app set last_release_scan_at = NOW() where id = :app_id');
+        $stmt->bindValue('app_id', $apps[0]['id']);
+        $stmt->execute();
+
+        $this->updateReleases($apps[0]);
 
         echo "ok";
         exit;
@@ -116,3 +122,6 @@ class ReleasesCronjobController extends BaseController {
         //exit;
     }
 }
+
+
+
