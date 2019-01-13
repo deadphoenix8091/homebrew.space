@@ -8,7 +8,7 @@
         <div class="mdl-card__supporting-text" style="text-align: center">
             {{ currentApplication.newest_release.description }}<br>
             <div class="qr-wrap">
-                <img src="data:image/gif;base64,{{ currentApplication.newest_release.qr_code|raw }}"/>
+                <img src="/qr/{{ currentApplication.id }}/{{ currentApplication.newest_release.id }}/QR.png"/>
             </div>
         </div>
         <div class="mdl-card__actions mdl-card--border">

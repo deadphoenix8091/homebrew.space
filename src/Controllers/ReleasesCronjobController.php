@@ -4,6 +4,7 @@ namespace HomebrewDB\Controllers;
 
 use HomebrewDB\BaseController;
 use HomebrewDB\CIAParser;
+use HomebrewDB\ConfigManager;
 use HomebrewDB\DatabaseManager;
 
 class ReleasesCronjobController extends BaseController {
@@ -15,7 +16,7 @@ class ReleasesCronjobController extends BaseController {
         if (count($pathSegments) < 2) {
             return false;
         }
-        $githubReleasesApiUrl = 'https://api.github.com/repos/' . $pathSegments[1] . '/' . $pathSegments[2] . '/releases?access_token=c6c62bdb3bcba406a29a44a1a690bd879b669e92';
+        $githubReleasesApiUrl = 'https://api.github.com/repos/' . $pathSegments[1] . '/' . $pathSegments[2] . '/releases?access_token=' . ConfigManager::GetConfiguration('github.tokeng');
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch,CURLOPT_USERAGENT,'deadphoenix8091');
@@ -93,7 +94,7 @@ class ReleasesCronjobController extends BaseController {
             imagecopyresampled($QR, $logo, $QR_width/3, $QR_height/3, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
         }
         ob_start ();
-        imagejpeg ($QR);
+        imagepng ($QR);
         $qrRaw = ob_get_contents ();
         ob_end_clean ();
         imagedestroy($QR);
@@ -103,7 +104,7 @@ class ReleasesCronjobController extends BaseController {
     public function indexAction() {
         ini_set('max_execution_time', 0);
         //Get the app/submission that is waiting the longest for a release scan (minimum wait time 1 hour)
-        $stmt = DatabaseManager::Prepare('select * from app where last_release_scan_at is null or last_release_scan_at < DATE_SUB(NOW(), INTERVAL 1 HOUR) order by last_release_scan_at asc limit 1');
+        $stmt = DatabaseManager::Prepare('select * from app where state > 0 and last_release_scan_at is null or last_release_scan_at < DATE_SUB(NOW(), INTERVAL 1 HOUR) order by last_release_scan_at asc limit 1');
         $stmt->execute();
         $apps = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 

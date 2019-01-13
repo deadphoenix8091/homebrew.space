@@ -11,10 +11,10 @@ class HomeController extends BaseController {
 
     protected function getViewData($categoryId, $title) {
         $stmt = null;
-        if ($categoryId === -1) {
-            $stmt = DatabaseManager::Prepare('select app.*, count(*) as "count" from app join app_categories on (app_categories.app_id = app.id) where app.state = 1 group by app.id');
+        if ($categoryId == 1 || $categoryId == -1) {
+            $stmt = DatabaseManager::Prepare('select app.* from app where app.state = 1 group by app.id');
         } else {
-            $stmt = DatabaseManager::Prepare('select app.*, count(*) as "count" from app join app_categories on (app_categories.app_id = app.id) where app.state = 1 and  app_categories.category_id = :category_id group by app.id');
+            $stmt = DatabaseManager::Prepare('select app.* from app join app_categories on (app_categories.app_id = app.id) where app.state = 1 and  app_categories.category_id = :category_id group by app.id');
             $stmt->bindValue(':category_id', $categoryId);
         }
 

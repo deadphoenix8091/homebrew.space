@@ -38,17 +38,15 @@ class Router {
                 case 'dl':
                     $targetRoute = ['Download', 'index'];
                     break;
+                case 'qr':
+                    $targetRoute = ['QR', 'index'];
+                    break;
                 case 'credits':
                     $targetRoute = ['Home', 'credits'];
                     break;
                 case 'rules-guidelines':
                     $targetRoute = ['Home', 'rules'];
                     break;
-                case 'tips':
-                    if (SessionManager::IsLoggedin()) {
-                        $targetRoute = ['Tips', 'index'];
-                        break;
-                    }
                 default:
                     http_response_code(404);
                     exit;
