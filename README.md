@@ -12,5 +12,5 @@ A community driven database for commonly used cia files. Easially accessible via
 - Standalone 3ds application to browse tinydb and keep your homebrew collection up to date
 - Moderation GUI for trusted "helpers" to manage tinydb entries
 - 3dsx support
-- Open API that can be integrated into Homebrew Applications to facilitate automatic updates
+- c library that can be integrated into Homebrew Applications to facilitate automatic updates
 - Blacklist/Filtering to minimize repetitive moderation work
