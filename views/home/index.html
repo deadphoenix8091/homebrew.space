@@ -1,34 +1,22 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h4>{{ title }}:</h4>
-<div class="project-list">
-{% for currentApplication in applications %}
-    <div class="mdl-card mdl-shadow--2dp project">
-        <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">{{ currentApplication.newest_release.name }}</h2>
-        </div>
-        <div class="mdl-card__supporting-text" style="text-align: center">
-            {{ currentApplication.newest_release.description }}<br>
-            <div class="qr-wrap">
-                <img src="data:image/gif;base64,{{ currentApplication.newest_release.qr_code|raw }}"/>
-            </div>
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-            <span class="mdl-chip">
-                <span class="mdl-chip__text">Latest: {{ currentApplication.newest_release.tag_name }}</span>
-            </span>
-            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/dl/{{ currentApplication.id }}/{{ currentApplication.newest_release.id }}/{{ currentApplication.newest_release.file_name }}" target="_blank">
-                Download
-            </a>
-        </div>
-        <!--<div class="mdl-card__menu">
-            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect js-show-qr" data-app_id="{{ currentApplication.app_id }}">
-                <i class="fas fa-qrcode"></i>
-            </button>
-        </div>-->
+<div class="submission-form mdl-card mdl-shadow--2dp">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Welcome to TinyDB</h2>
     </div>
-{% endfor %}
+    <div class="mdl-card__supporting-text">
+        <p>This is a community-maintained database of some of the most common and useful apps and tools for a hacked Nintendo 3DS family system.</p>
+        <p>Trusted applications are automatically scanned for new releases every hour. If you have any questions or feature requests please open an issue on our <a href="https://github.com/deadphoenix8091/tinydb" target="_blank">Github Repository</a>.</p>
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/submit">
+            Submit Application
+        </a>
+    </div>
 </div>
+
+
+{% include 'partials/applications.html' %}
 
 {% endblock %}
