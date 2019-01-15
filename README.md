@@ -21,9 +21,9 @@ This is a very crud explaination of the API, it is going to grow as more feature
 
 Available Endpoints:
 
-- "/api/apps" : As one might expect, this returns a list of all apps including all releases. 
-- "/api/apps?app_id=1" : Above endpoint can also be used with an app_id parameter to only get releases for 1 specific application. For example fbi has id 1. This filter can be used for automatic updates.
-- "/api/apps?category_id=3" : By specifying the category_id parameter you only get apps and releases that are mapped to one specific category (NOTE: Can not be used in combination with the app_id, please only specify the app_id in that case)
-- "/api/categories" : This endpoint returns a list of all categories with an app count for each category.
+- "/apps" : As one might expect, this returns a list of all apps including all releases. 
+- "/apps?app_id=1" : Above endpoint can also be used with an app_id parameter to only get releases for 1 specific application. For example fbi has id 1. This filter can be used for automatic updates.
+- "/apps?category_id=3" : By specifying the category_id parameter you only get apps and releases that are mapped to one specific category (NOTE: Can not be used in combination with the app_id, please only specify the app_id in that case)
+- "/categories" : This endpoint returns a list of all categories with an app count for each category.
 
-API Base URL: https://tinydb.eiphax.tech
+API Base URL: https://tinydb.eiphax.tech/api
