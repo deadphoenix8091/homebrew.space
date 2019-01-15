@@ -18,6 +18,9 @@
             <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/dl/{{ currentApplication.id }}/{{ currentApplication.newest_release.id }}/{{ currentApplication.newest_release.file_name }}" target="_blank">
                 Download
             </a>
+            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ currentApplication.github_url }}" target="_blank">
+                Github Repository
+            </a>
         </div>
         <!--<div class="mdl-card__menu">
             <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect js-show-qr" data-app_id="{{ currentApplication.app_id }}">

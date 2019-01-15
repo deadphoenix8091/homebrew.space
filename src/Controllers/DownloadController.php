@@ -36,11 +36,11 @@ class DownloadController extends BaseController {
             header("Content-Transfer-Encoding: Binary");
             header("Content-disposition: attachment; filename=\"" . $release['file_name'] . "\"");
 
-            $storageFileName = __DIR__.'/../../storage/'.$appId.'-'.$release['id'].'-'.$release['file_name'];
-            if (!file_exists($storageFileName)) {
-                file_put_contents($storageFileName, file_get_contents($release['download_url']));
-            }
-            $ciaContent = file_get_contents($storageFileName);
+           // $storageFileName = __DIR__.'/../../storage/'.$appId.'-'.$release['id'].'-'.$release['file_name'];
+            //if (!file_exists($storageFileName)) {
+            //    file_put_contents($storageFileName, file_get_contents($release['download_url']));
+            //}
+            $ciaContent = file_get_contents($release['download_url']);
             header("Content-Length: " . strlen($ciaContent));
             echo $ciaContent;
             exit;

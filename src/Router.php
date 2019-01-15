@@ -17,6 +17,7 @@ class Router {
 
     private function getController() {
         $page = isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : '';
+        $page = array_filter(explode('?', $page))[0];
         $targetRoute = ['Home', 'index'];
 
         $urlSegments = array_values(array_filter(explode('/', $page)));
@@ -46,6 +47,24 @@ class Router {
                     break;
                 case 'rules-guidelines':
                     $targetRoute = ['Home', 'rules'];
+                    break;
+                case 'api':
+                    if (count($urlSegments) > 1) {
+                        switch ($urlSegments[1]) {
+                            case 'apps':
+                                $targetRoute = ['API', 'apps'];
+                                break;
+                            case 'categories':
+                                $targetRoute = ['API', 'categories'];
+                                break;
+                            default:
+                                http_response_code(404);
+                                exit;
+                        }
+                    } else {
+                        http_response_code(404);
+                        exit;
+                    }
                     break;
                 default:
                     http_response_code(404);

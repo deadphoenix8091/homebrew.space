@@ -16,7 +16,7 @@ class ReleasesCronjobController extends BaseController {
         if (count($pathSegments) < 2) {
             return false;
         }
-        $githubReleasesApiUrl = 'https://api.github.com/repos/' . $pathSegments[1] . '/' . $pathSegments[2] . '/releases?access_token=' . ConfigManager::GetConfiguration('github.tokeng');
+        $githubReleasesApiUrl = 'https://api.github.com/repos/' . $pathSegments[1] . '/' . $pathSegments[2] . '/releases?access_token=' . ConfigManager::GetConfiguration('github.token');
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch,CURLOPT_USERAGENT,'deadphoenix8091');
@@ -43,8 +43,9 @@ class ReleasesCronjobController extends BaseController {
 
                 $file = tmpfile();
                 $ciaFileContent = file_get_contents($currentAsset['browser_download_url']);
+                $ciaSize = strlen($ciaFileContent);
                 fseek($file, 0);
-                fwrite($file, $ciaFileContent, strlen($ciaFileContent));
+                fwrite($file, $ciaFileContent, $ciaSize);
                 fseek($file, 0);
                 $ciaMetaData = CIAParser::GetMetadata($file);
                 fclose($file);
@@ -52,8 +53,8 @@ class ReleasesCronjobController extends BaseController {
                 $base64QRJpeg = $this->createQRCode('dl/' . $appId . '/latest/' . $currentAsset['name'], base64_decode($ciaMetaData['images']['big']));
                 $ciaFileContent = '';
 
-                $stmt = DatabaseManager::Prepare('insert into app_releases (`id`, `file_name`, `download_url`, `tag_name`, `prerelease`, `name`, `description`, `app_id`, `qr_code`, `created_at`)'.
-                    ' values (:id, :file_name, :download_url, :tag_name, :prerelease, :name, :description, :app_id, :qr_code, :created_at)');
+                $stmt = DatabaseManager::Prepare('insert into app_releases (`id`, `file_name`, `download_url`, `tag_name`, `prerelease`, `name`, `description`, `author`, `titleid`, `size`, `app_id`, `qr_code`, `created_at`)'.
+                    ' values (:id, :file_name, :download_url, :tag_name, :prerelease, :name, :description, :author, :titleid, :ciasize, :app_id, :qr_code, :created_at)');
                 $stmt->bindValue('id', $currentRelease['id']);
                 $stmt->bindValue('file_name', $currentAsset['name']);
                 $stmt->bindValue('download_url', $currentAsset['browser_download_url']);
@@ -63,6 +64,9 @@ class ReleasesCronjobController extends BaseController {
                 $stmt->bindValue('qr_code', $base64QRJpeg);
                 $stmt->bindValue('created_at', $currentRelease['created_at']);
                 $stmt->bindValue('name', $ciaMetaData['name']);
+                $stmt->bindValue('author', $ciaMetaData['publisher']);
+                $stmt->bindValue('ciasize', $ciaSize);
+                $stmt->bindValue('titleid', $ciaMetaData['title_id']);
                 $stmt->bindValue('description', $ciaMetaData['description']);
                 $stmt->execute();
 
