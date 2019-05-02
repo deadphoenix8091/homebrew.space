@@ -2,12 +2,12 @@
 <div class="project-list">
     {% for currentApplication in applications %}
     <div class="mdl-card mdl-shadow--2dp project">
-        <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">{{ currentApplication.newest_release.name }}</h2>
-        </div>
-        <div class="mdl-card__supporting-text" style="text-align: center">
-            {{ currentApplication.newest_release.description }}<br>
-            <div class="qr-wrap">
+        <div class="mdl-card__supporting-text">
+                        <b class="project--title">{{ currentApplication.newest_release.name }}</b><br><br>
+            <p class="project--info">Description: {{ currentApplication.newest_release.description }}<br>
+TID: {{ currentApplication.newest_release.titleid }}<br>
+Last Updated: {{ currentApplication.newest_release.created_at|date("m/d/Y") }}</p>
+            <div class="qr-wrap" style="margin: 0 auto">
                 <img src="/qr/{{ currentApplication.id }}/{{ currentApplication.newest_release.id }}/QR.png"/>
             </div>
         </div>
