@@ -57,6 +57,9 @@ class Router {
                             case 'categories':
                                 $targetRoute = ['API', 'categories'];
                                 break;
+                            case 'search':
+                                $targetRoute = ['API', 'search'];
+                                break;
                             default:
                                 http_response_code(404);
                                 exit;
