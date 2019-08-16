@@ -6,6 +6,46 @@ use HomebrewDB\BaseController;
 use HomebrewDB\DatabaseManager;
 
 class APIController extends BaseController {
+    
+    public function searchAction() {
+        $page = isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : '';
+        $urlSegments = array_values(array_filter(explode('/', $page)));
+
+        $searchQuery = '';
+        if (count($urlSegments) > 2)
+            $searchQuery = $urlSegments[2];
+        
+        $stmt = DatabaseManager::Prepare('select app.*, count(*) as "count" from app join app_categories on (app_categories.app_id = app.id) join app_releases on (app_releases.app_id = app.id) where app.state = 1 and ((app.name like :search_term OR app.description like :search_term OR app.author like :search_term) OR (app_releases.name like :search_term OR app_releases.descripti$
+        $stmt->bindValue('search_term', '%'.$searchQuery.'%');
+        $stmt->execute();
+        $applications = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $applicationsWithReleases = [];
+        foreach($applications as $key => $currentApplication) {
+            $applications[$key]['url'] = '/app/' . $currentApplication['id'] . '-' . mb_strtolower($currentApplication['name']);
+
+            $stmt = DatabaseManager::Prepare('select * from app_releases where app_id = :app_id order by prerelease asc, created_at desc limit 1');
+            $stmt->bindValue('app_id', $currentApplication['id']);
+            $stmt->execute();
+            $release = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+            if ($release !== false) {
+                $release['qr_url'] = 'https://tinydb.eiphax.tech/qr/' . $currentApplication['id'] . '/' . $release['id'] . '/QR.png';
+                $release['download_url'] = 'https://tinydb.eiphax.tech/dl/' . $currentApplication['id'] . '/' . $release['id'] . '/' . $release['file_name'];
+                unset($release['qr_code']);
+                unset($release['app_id']);
+                $applications[$key]['newest_release'] = $release;
+                unset($applications[$key]['count']);
+                unset($applications[$key]['state']);
+                unset($applications[$key]['author']);
+                unset($applications[$key]['description']);
+                                         
+                $this->returnJson(['success' => true, 'result' => $applications[$key]]);
+            }
+        }
+        $this->returnJson(['success' => false]);
+    }
+
     public function appsAction() {
         $stmt = null;
         if (isset($_REQUEST['app_id'])) {
