@@ -74,7 +74,7 @@ class SubmissionController extends BaseController {
             $result = $stmt->execute();
 
             if ($result == false) {
-                return ['formData' => $_POST, 'success' => false, 'errors' => 'There was an error while inserting your submission into the database.'];
+                return ['formData' => $_POST, 'success' => false, 'errors' => ['There was an error while inserting your submission into the database.']];
             }
 
             return ['success' => true, 'message' => 'Your submission has been received, it will now be checked and accepted if it complies with our rules.'];
