@@ -15,7 +15,7 @@ class APIController extends BaseController {
         if (count($urlSegments) > 2)
             $searchQuery = $urlSegments[2];
         
-        $stmt = DatabaseManager::Prepare('select app.*, count(*) as "count" from app join app_categories on (app_categories.app_id = app.id) join app_releases on (app_releases.app_id = app.id) where app.state = 1 and ((app.name like :search_term OR app.description like :search_term OR app.author like :search_term) OR (app_releases.name like :search_term OR app_releases.descripti$
+        $stmt = DatabaseManager::Prepare('select app.*, count(*) as "count" from app join app_categories on (app_categories.app_id = app.id) join app_releases on (app_releases.app_id = app.id) where app.state = 1 and ((app.name like :search_term OR app.description like :search_term OR app.author like :search_term) OR (app_releases.name like :search_term OR app_releases.description like :search_term OR app_releases.author like :search_term))');
         $stmt->bindValue('search_term', '%'.$searchQuery.'%');
         $stmt->execute();
         $applications = $stmt->fetchAll(\PDO::FETCH_ASSOC);
