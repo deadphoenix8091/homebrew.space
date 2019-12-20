@@ -4,6 +4,7 @@ namespace HomebrewDB\Controllers;
 
 use HomebrewDB\BaseController;
 use HomebrewDB\DatabaseManager;
+use HomebrewDB\ContentType;
 
 class APIController extends BaseController {
     
@@ -15,7 +16,7 @@ class APIController extends BaseController {
         if (count($urlSegments) > 2)
             $searchQuery = $urlSegments[2];
         
-        $stmt = DatabaseManager::Prepare('select app.*, count(*) as "count" from app join app_categories on (app_categories.app_id = app.id) join app_releases on (app_releases.app_id = app.id) where app.state = 1 and ((app.name like :search_term OR app.description like :search_term OR app.author like :search_term) OR (app_releases.name like :search_term OR app_releases.descripti$
+        $stmt = DatabaseManager::Prepare('select app.*, count(*) as "count" from app join app_categories on (app_categories.app_id = app.id) join app_releases on (app_releases.app_id = app.id) where app.state = 1 and ((app.name like :search_term OR app.description like :search_term OR app.author like :search_term) OR (app_releases.name like :search_term OR app_releases.description like :search_term OR app_releases.author like :search_term))');
         $stmt->bindValue('search_term', '%'.$searchQuery.'%');
         $stmt->execute();
         $applications = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -81,18 +82,29 @@ class APIController extends BaseController {
                 "headline" => $newestRelease['description'],
                 "categories" => array_map('intval', explode(',', $currentApplication['categories'])),
                 "cia" => [],
-                "tdsx" => []
+                "3dsx" => []
             ];
             foreach($releases as $currentRelease) {
-                $applicationsAPIDataEntry['cia'][] = [
-                    'id' => intval($currentRelease['id']),
-                    'mtime' => $currentRelease['created_at'],
-                    'version' => $currentRelease['tag_name'],
-                    'size' => intval($currentRelease['size']),
-                    'titleid' => $currentRelease['titleid'],
-                    //Yes the url shouldnt be static but I wanted to get this done quickly for now :)
-                    'download_url' => 'https://tinydb.eiphax.tech/dl/'.intval($currentApplication['id']).'/'.intval($currentRelease['id']).'/'.$currentRelease['file_name']
-                ];
+               if ($currentRelease['content_type'] == ContentType::CIA) {
+                    $applicationsAPIDataEntry['cia'][] = [
+                        'id' => intval($currentRelease['id']),
+                        'mtime' => $currentRelease['created_at'],
+                        'version' => $currentRelease['tag_name'],
+                        'size' => intval($currentRelease['size']),
+                        'titleid' => $currentRelease['titleid'],
+                        //Yes the url shouldnt be static but I wanted to get this done quickly for now :)
+                        'download_url' => 'https://tinydb.eiphax.tech/dl/'.intval($currentApplication['id']).'/'.intval($currentRelease['id']).'/'.$currentRelease['file_name']
+                    ];
+               } else if ($currentRelease['content_type'] == ContentType::TDSX) {
+                    $applicationsAPIDataEntry['3dsx'][] = [
+                        'id' => intval($currentRelease['id']),
+                        'mtime' => $currentRelease['created_at'],
+                        'version' => $currentRelease['tag_name'],
+                        'size' => intval($currentRelease['size']),
+                        //Yes the url shouldnt be static but I wanted to get this done quickly for now :)
+                        'download_url' => 'https://tinydb.eiphax.tech/dl/'.intval($currentApplication['id']).'/'.intval($currentRelease['id']).'/'.$currentRelease['file_name']
+                    ];
+                }
             }
 
             $applicationsAPIData[] = $applicationsAPIDataEntry;

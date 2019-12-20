@@ -57,6 +57,7 @@ CREATE TABLE `app_categories` (
 
 CREATE TABLE `app_releases` (
   `id` int(11) NOT NULL,
+  `content_type` int(1) NOT NULL,
   `file_name` varchar(255) NOT NULL,
   `download_url` varchar(512) NOT NULL,
   `tag_name` varchar(256) NOT NULL,

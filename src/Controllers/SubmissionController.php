@@ -67,6 +67,7 @@ class SubmissionController extends BaseController {
             //@TODO: Check duplicates here already???
             $stmt = DatabaseManager::Prepare('INSERT INTO `app`(`name`, `description`, `author`, `github_url`, `state`, `created_at`, `updated_at`)' .
                                                 ' VALUES (:name,:description,:author,:github_url,0,now(),now())');
+
             $stmt->bindValue('name', $_REQUEST['name']);
             $stmt->bindValue('description', $_REQUEST['description']);
             $stmt->bindValue('author', $_REQUEST['author']);
@@ -74,7 +75,7 @@ class SubmissionController extends BaseController {
             $result = $stmt->execute();
 
             if ($result == false) {
-                return ['formData' => $_POST, 'success' => false, 'errors' => 'There was an error while inserting your submission into the database.'];
+                return ['formData' => $_POST, 'success' => false, 'errors' => ['There was an error while inserting your submission into the database.']];
             }
 
             return ['success' => true, 'message' => 'Your submission has been received, it will now be checked and accepted if it complies with our rules.'];

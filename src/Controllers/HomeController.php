@@ -5,6 +5,7 @@ namespace HomebrewDB\Controllers;
 use HomebrewDB\BaseController;
 use HomebrewDB\ConfigManager;
 use HomebrewDB\DatabaseManager;
+use HomebrewDB\ContentType;
 
 class HomeController extends BaseController {
     protected $viewFolder = 'home';
@@ -24,8 +25,9 @@ class HomeController extends BaseController {
         foreach($applications as $key => $currentApplication) {
             $applications[$key]['url'] = '/app/' . $currentApplication['id'] . '-' . mb_strtolower($currentApplication['name']);
 
-            $stmt = DatabaseManager::Prepare('select * from app_releases where app_id = :app_id order by prerelease asc, created_at desc limit 1');
+            $stmt = DatabaseManager::Prepare('select * from app_releases where app_id = :app_id and app_releases.content_type = :app_type order by prerelease asc, created_at desc limit 1');
             $stmt->bindValue('app_id', $currentApplication['id']);
+            $stmt->bindValue('app_type', ContentType::CIA);
             $stmt->execute();
             $release = $stmt->fetch(\PDO::FETCH_ASSOC);
 

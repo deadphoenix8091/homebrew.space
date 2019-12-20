@@ -6,3 +6,6 @@ database:
 web:
   domain: localhost
   use_ssl: true
+github:
+  username: deadphoenix8091
+  token:

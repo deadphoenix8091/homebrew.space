@@ -17,6 +17,7 @@ class DatabaseManager {
         $password = ConfigManager::GetConfiguration('database.password');
         self::$connection = new \PDO('mysql:dbname=' . $database . ';host=' . $host, $username, $password);
 
+        self::$connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         //@TODO: Add database error handling
     }
 
