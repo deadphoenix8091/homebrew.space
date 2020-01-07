@@ -31,8 +31,8 @@ class APIController extends BaseController {
             $release = $stmt->fetch(\PDO::FETCH_ASSOC);
 
             if ($release !== false) {
-                $release['qr_url'] = 'https://tinydb.eiphax.tech/qr/' . $currentApplication['id'] . '/' . $release['id'] . '/QR.png';
-                $release['download_url'] = 'https://tinydb.eiphax.tech/dl/' . $currentApplication['id'] . '/' . $release['id'] . '/' . $release['file_name'];
+                $release['qr_url'] = 'https://tinydb.eiphax.tech/qr/' . $currentApplication['id'] . '/' . $release['release_id'] . '/' .$release['asset_id'] . '/QR.png';
+                $release['download_url'] = 'https://tinydb.eiphax.tech/dl/' . $currentApplication['id'] . '/' . $release['release_id'] . '/' .$release['asset_id'] . '/' . $release['file_name'];
                 unset($release['qr_code']);
                 unset($release['app_id']);
                 $applications[$key]['newest_release'] = $release;
@@ -87,22 +87,24 @@ class APIController extends BaseController {
             foreach($releases as $currentRelease) {
                if ($currentRelease['content_type'] == ContentType::CIA) {
                     $applicationsAPIDataEntry['cia'][] = [
-                        'id' => intval($currentRelease['id']),
+                        'release_id' => intval($currentRelease['release_id']),
+                        'asset_id' => intval($currentRelease['asset_id']),
                         'mtime' => $currentRelease['created_at'],
                         'version' => $currentRelease['tag_name'],
                         'size' => intval($currentRelease['size']),
                         'titleid' => $currentRelease['titleid'],
                         //Yes the url shouldnt be static but I wanted to get this done quickly for now :)
-                        'download_url' => 'https://tinydb.eiphax.tech/dl/'.intval($currentApplication['id']).'/'.intval($currentRelease['id']).'/'.$currentRelease['file_name']
+                        'download_url' => 'https://tinydb.eiphax.tech/dl/'.intval($currentApplication['id']).'/'.$currentRelease['release_id'].'/'.$currentRelease['asset_id'].'/'.$currentRelease['file_name']
                     ];
                } else if ($currentRelease['content_type'] == ContentType::TDSX) {
                     $applicationsAPIDataEntry['3dsx'][] = [
-                        'id' => intval($currentRelease['id']),
+                        'release_id' => intval($currentRelease['release_id']),
+                        'asset_id' => intval($currentRelease['asset_id']),
                         'mtime' => $currentRelease['created_at'],
                         'version' => $currentRelease['tag_name'],
                         'size' => intval($currentRelease['size']),
                         //Yes the url shouldnt be static but I wanted to get this done quickly for now :)
-                        'download_url' => 'https://tinydb.eiphax.tech/dl/'.intval($currentApplication['id']).'/'.intval($currentRelease['id']).'/'.$currentRelease['file_name']
+                        'download_url' => 'https://tinydb.eiphax.tech/dl/'.intval($currentApplication['id']).'/'.$currentRelease['release_id'].'/'.$currentRelease['asset_id'].'/'.$currentRelease['file_name']
                     ];
                 }
             }

@@ -13,9 +13,9 @@ class HomeController extends BaseController {
     protected function getViewData($categoryId, $title) {
         $stmt = null;
         if ($categoryId == 1 || $categoryId == -1) {
-            $stmt = DatabaseManager::Prepare("select app.*, app_releases.name from app join app_releases on (app_releases.id = (select ap.id from app_releases ap where ap.app_id = app.id order by ap.prerelease asc, ap.created_at desc limit 1)) where app.state = 1 order by app_releases.created_at desc");
+            $stmt = DatabaseManager::Prepare("select app.*, app_releases.name from app join app_releases on (app_releases.release_id = (select ap.release_id from app_releases ap where ap.app_id = app.id order by ap.prerelease asc, ap.created_at desc limit 1) and app_releases.asset_id = (select ap.asset_id from app_releases ap where ap.app_id = app.id order by ap.prerelease asc, ap.created_at desc limit 1)) where app.state = 1 order by app_releases.created_at desc");
         } else {
-            $stmt = DatabaseManager::Prepare('select app.*, app_releases.name from app join app_releases on (app_releases.id = (select ap.id from app_releases ap where ap.app_id = app.id order by ap.prerelease asc, ap.created_at desc limit 1)) join app_categories on (app_categories.app_id = app.id) where app.state = 1 and app_categories.category_id = :category_id group by app.id order by app_releases.created_at desc');
+            $stmt = DatabaseManager::Prepare('select app.*, app_releases.name from app join app_releases on (app_releases.release_id = (select ap.release_id from app_releases ap where ap.app_id = app.id order by ap.prerelease asc, ap.created_at desc limit 1) and app_releases.asset_id = (select ap.asset_id from app_releases ap where ap.app_id = app.id order by ap.prerelease asc, ap.created_at desc limit 1)) join app_categories on (app_categories.app_id = app.id) where app.state = 1 and app_categories.category_id = :category_id group by app.id order by app_releases.created_at desc');
             $stmt->bindValue(':category_id', $categoryId);
         }
 

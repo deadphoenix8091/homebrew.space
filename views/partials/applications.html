@@ -8,14 +8,14 @@
 TID: {{ currentApplication.newest_release.titleid }}<br>
 Last Updated: {{ currentApplication.newest_release.created_at|date("m/d/Y") }}</p>
             <div class="qr-wrap" style="margin: 0 auto">
-                <img src="/qr/{{ currentApplication.id }}/{{ currentApplication.newest_release.id }}/QR.png"/>
+                <img src="/qr/{{ currentApplication.id }}/{{ currentApplication.newest_release.release_id}}/{{ currentApplication.newest_release.asset_id}}/QR.png"/>
             </div>
         </div>
         <div class="mdl-card__actions mdl-card--border">
             <span class="mdl-chip">
                 <span class="mdl-chip__text">Latest: {{ currentApplication.newest_release.tag_name }}</span>
             </span>
-            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/dl/{{ currentApplication.id }}/{{ currentApplication.newest_release.id }}/{{ currentApplication.newest_release.file_name }}" target="_blank">
+            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/dl/{{ currentApplication.id }}/{{ currentApplication.newest_release.release_id}}/{{ currentApplication.newest_release.asset_id}}/{{ currentApplication.newest_release.file_name }}" target="_blank">
                 Download
             </a>
             <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ currentApplication.github_url }}" target="_blank">

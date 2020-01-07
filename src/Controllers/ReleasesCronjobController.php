@@ -29,19 +29,22 @@ class ReleasesCronjobController extends BaseController {
         }
         foreach($releasesData as $currentRelease) {
             echo "Hello:<br/>";
+            $stmt = DatabaseManager::Prepare('select count(1) as found_releases from app_releases where release_id = :release_id');
+            $stmt->bindValue('release_id', $currentRelease['id']);
+            $stmt->execute();
+            if (intval($stmt->fetch()['found_releases']) > 0) {
+                continue; //We already got this release, no need to fetch everything again
+            }
 
+            unset($gotCia);
+            unset($got3dsx);
             foreach ($currentRelease['assets'] as $currentAsset) {
-                $stmt = DatabaseManager::Prepare('select count(1) as found_releases from app_releases where id = :release_id');
-                $stmt->bindValue('release_id', $currentAsset['id']);
-                $stmt->execute();
-                if (intval($stmt->fetch()['found_releases']) > 0) {
-                    continue; //We already got this release, no need to fetch everything again
-                }
-
                 $lowerFilename = mb_strtolower($currentAsset['name']);
-                if (mb_strpos($lowerFilename, '.cia') !== false) {
+                if ((mb_strpos($lowerFilename, '.cia') !== false) && $gotCia !== true) {
+                    $gotCia = true;
                     $contentType = ContentType::CIA;
-                } else if (mb_strpos($lowerFilename, '.3dsx') !== false) {
+                } else if ((mb_strpos($lowerFilename, '.3dsx') !== false) && $got3dsx !== true) {
+                    $got3dsx = true;
                     $contentType = ContentType::TDSX;
                 } else {
                     continue;
@@ -62,12 +65,13 @@ class ReleasesCronjobController extends BaseController {
                 }
                 fclose($file);
                 //@TODO: QR Code needs correct download link for current release as fileName
-                $base64QRJpeg = $this->createQRCode('dl/' . $appId . '/latest/' . $currentAsset['name'], base64_decode($appMetaData['images']['big']));
+                $base64QRJpeg = $this->createQRCode('dl/' . $appId . '/latest/' . ContentType::typeToStr($contentType) . $currentAsset['name'], base64_decode($appMetaData['images']['big']));
                 $fileContent = '';
-                $stmt = DatabaseManager::Prepare('insert into app_releases (`id`, `content_type`, `file_name`, `download_url`, `tag_name`, `prerelease`, `name`, `description`, `author`, `titleid`, `size`, `app_id`, `qr_code`, `created_at`)'.
-                        ' values (:id, :content_type, :file_name, :download_url, :tag_name, :prerelease, :name, :description, :author, :titleid, :content_size, :app_id, :qr_code, :created_at)');
+                $stmt = DatabaseManager::Prepare('insert into app_releases (`release_id`, `asset_id`, `content_type`, `file_name`, `download_url`, `tag_name`, `prerelease`, `name`, `description`, `author`, `titleid`, `size`, `app_id`, `qr_code`, `created_at`)'.
+                        ' values (:release_id, :asset_id, :content_type, :file_name, :download_url, :tag_name, :prerelease, :name, :description, :author, :titleid, :content_size, :app_id, :qr_code, :created_at)');
                 try {
-                    $stmt->bindValue('id', $currentAsset['id']);
+                    $stmt->bindValue('release_id', $currentRelease['id']);
+                    $stmt->bindValue('asset_id', $currentAsset['id']);
                     $stmt->bindValue('content_type', $contentType);
                     $stmt->bindValue('file_name', $currentAsset['name']);
                     $stmt->bindValue('download_url', $currentAsset['browser_download_url']);
