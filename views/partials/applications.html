@@ -7,9 +7,14 @@
             <p class="project--info">Description: {{ currentApplication.newest_release.description }}<br>
 TID: {{ currentApplication.newest_release.titleid }}<br>
 Last Updated: {{ currentApplication.newest_release.created_at|date("m/d/Y") }}</p>
-            <div class="qr-wrap" style="margin: 0 auto">
+
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+    Show QR Code
+  </button>
+
+            <!--<div class="qr-wrap" style="margin: 0 auto">
                 <img src="/qr/{{ currentApplication.id }}/{{ currentApplication.newest_release.id }}/QR.png"/>
-            </div>
+            </div>-->
         </div>
         <div class="mdl-card__actions mdl-card--border">
             <span class="mdl-chip">

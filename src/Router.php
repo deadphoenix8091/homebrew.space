@@ -15,8 +15,8 @@ class Router {
         $this->twigEnvironment = $twigEnvironment;
     }
 
-    private function getController() {
-        $page = isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : '';
+    private function getController($request) {
+        $page = $request->server['request_uri'];
         $page = array_filter(explode('?', $page))[0];
         $targetRoute = ['Home', 'index'];
 
@@ -61,17 +61,17 @@ class Router {
                                 $targetRoute = ['API', 'search'];
                                 break;
                             default:
-                                http_response_code(404);
-                                exit;
+                                $targetRoute = ['Home', 'index'];
+                                break;
                         }
                     } else {
-                        http_response_code(404);
-                        exit;
+                        $targetRoute = ['Home', 'index'];
+                        break;
                     }
                     break;
                 default:
-                    http_response_code(404);
-                    exit;
+                    $targetRoute = ['Home', 'index'];
+                    break;
             }
         }
 
@@ -81,8 +81,8 @@ class Router {
     /**
      * @param $dbManager DatabaseManager
      */
-    public function process() {
-        $controllerAction = $this->getController();
+    public function process($request) {
+        $controllerAction = $this->getController($request);
 
         $controllerClassName = "\\HomebrewDB\\Controllers\\" . $controllerAction[0] . "Controller";
         /** @var BaseController $controllerInstance */

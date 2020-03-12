@@ -1,4 +1,4 @@
-FROM php:7.4.2-cli
+FROM php:7.4-cli
 
 RUN apt-get update && apt-get install vim -y && \
     apt-get install openssl -y && \
@@ -6,7 +6,8 @@ RUN apt-get update && apt-get install vim -y && \
     apt-get install wget -y && \
     apt-get install git -y && \
     apt-get install procps -y && \
-    apt-get install htop -y
+    apt-get install htop -y && \
+    apt-get install npm -y
 
 RUN apt-get install -y \
     libzip-dev \
@@ -36,7 +37,9 @@ RUN cd /app && \
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php && \
     php -r "unlink('composer-setup.php');" && \
-    php composer.phar install
+    php composer.phar install && \
+    npm install && \
+    npm run build
 
 ENTRYPOINT ["/usr/local/bin/dumb-init", "--"]
 WORKDIR /app
