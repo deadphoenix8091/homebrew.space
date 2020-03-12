@@ -87,6 +87,6 @@ class Router {
         $controllerClassName = "\\HomebrewDB\\Controllers\\" . $controllerAction[0] . "Controller";
         /** @var BaseController $controllerInstance */
         $controllerInstance = new $controllerClassName($this);
-        $controllerInstance->process($controllerAction[1]); //@TODO: Pass Request info somehow
+        return $controllerInstance->process($controllerAction[1]); //@TODO: Pass Request info somehow
     }
 }
