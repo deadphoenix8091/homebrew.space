@@ -1,10 +1,10 @@
 <?php
 
-namespace HomebrewDB\Controllers;
+namespace HomebrewSpace\Controllers;
 
-use HomebrewDB\BaseController;
-use HomebrewDB\ConfigManager;
-use HomebrewDB\DatabaseManager;
+use HomebrewSpace\BaseController;
+use HomebrewSpace\ConfigManager;
+use HomebrewSpace\DatabaseManager;
 
 class HomeController extends BaseController {
     protected $viewFolder = 'home';

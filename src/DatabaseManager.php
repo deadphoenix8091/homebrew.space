@@ -1,6 +1,6 @@
 <?php
 
-namespace HomebrewDB;
+namespace HomebrewSpace;
 
 class DatabaseManager {
     /** @var \mysqli */

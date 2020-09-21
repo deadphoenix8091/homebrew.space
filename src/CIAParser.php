@@ -1,6 +1,6 @@
 <?php
 
-namespace HomebrewDB;
+namespace HomebrewSpace;
 
 class CIAParser {
     private static function blockAlign($dataSize, $blockSize) {
