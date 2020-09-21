@@ -1,6 +1,6 @@
 <?php
 
-namespace HomebrewDB;
+namespace HomebrewSpace;
 
 class Router {
     /** @var \Twig_Environment */
@@ -84,7 +84,7 @@ class Router {
     public function process($request) {
         $controllerAction = $this->getController($request);
 
-        $controllerClassName = "\\HomebrewDB\\Controllers\\" . $controllerAction[0] . "Controller";
+        $controllerClassName = "\\HomebrewSpace\\Controllers\\" . $controllerAction[0] . "Controller";
         /** @var BaseController $controllerInstance */
         $controllerInstance = new $controllerClassName($this);
         return $controllerInstance->process($controllerAction[1]); //@TODO: Pass Request info somehow

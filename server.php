@@ -46,7 +46,7 @@ $http->on('request', function ($request, $response) use ($twig, $static) {
         return;
     }
 
-    $router = new \HomebrewDB\Router($twig);
+    $router = new \HomebrewSpace\Router($twig);
     $response->header("Content-Type", "text/html");
     $response->end($router->process($request));
 });
