@@ -1,4 +1,4 @@
-FROM FROM php:7.4-cli
+FROM php:7.4-cli
 
 RUN apt-get update && apt-get install vim -y && \
     apt-get install openssl -y && \
@@ -23,4 +23,6 @@ RUN chmod +x /usr/local/bin/dumb-init
 
 RUN apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
-ENTRYPOINT ["/usr/local/bin/dumb-init", "--", "php"]
+ADD . /code
+
+ENTRYPOINT ["/usr/local/bin/dumb-init", "--", "php", "/code/server.php"]
