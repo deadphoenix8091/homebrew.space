@@ -1,9 +1,10 @@
 {
-    "name": "deadphoenix/homebrew.space",
+    "name": "deadphoenix8091/homebrew.space",
     "type": "project",
     "require": {
         "twig/twig": "^3.0",
-        "symfony/yaml": "^5.0"
+        "symfony/yaml": "^5.0",
+        "swoole/ide-helper": "@dev"
     },
     "autoload": {
         "psr-4": {

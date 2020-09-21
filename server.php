@@ -1,26 +1,15 @@
 <?php
+
+use HomebrewSpace\Controllers\StaticFileController;
+
+chdir('/code');
 require_once './vendor/autoload.php';
 
-$http = new Swoole\HTTP\Server("0.0.0.0", 80);
+$http = new \Swoole\HTTP\Server("0.0.0.0", 80);
 
 $loader = new \Twig\Loader\FilesystemLoader('./views');
 $twig = new \Twig\Environment($loader, array(
 ));
-
-$static = [
-    'css'  => 'text/css',
-    'js'   => 'text/javascript',
-    'png'  => 'image/png',
-    'gif'  => 'image/gif',
-    'jpg'  => 'image/jpg',
-    'jpeg' => 'image/jpg',
-    'mp4'  => 'video/mp4',
-    'eot' => 'application/vnd.ms-fontobject',
-    'svg' => 'image/svg+xml',
-    'ttf' => 'application/font-ttf',
-    'woff' => 'application/font-woff',
-    'woff2' => 'font/woff2'
-];
 
 $function_filedate = new \Twig\TwigFunction(
     'fileDate',
@@ -41,8 +30,8 @@ $http->on('start', function ($server) {
     printf("Manager PID: %d\n", $server->manager_pid);
 });
 
-$http->on('request', function ($request, $response) use ($twig, $static) {
-    if (getStaticFile($request, $response, $static)) {
+$http->on('request', function ($request, $response) use ($twig) {
+    if (StaticFileController::handleStaticFile($request, $response)) {
         return;
     }
 
@@ -52,21 +41,3 @@ $http->on('request', function ($request, $response) use ($twig, $static) {
 });
 
 $http->start();
-
-function getStaticFile(
-    swoole_http_request $request,
-    swoole_http_response $response,
-    array $static
-) : bool {
-    $staticFile = __DIR__ . $request->server['request_uri'];
-    if (! file_exists($staticFile)) {
-        return false;
-    }
-    $type = pathinfo($staticFile, PATHINFO_EXTENSION);
-    if (! isset($static[$type])) {
-        return false;
-    }
-    $response->header('Content-Type', $static[$type]);
-    $response->sendfile($staticFile);
-    return true;
-}
