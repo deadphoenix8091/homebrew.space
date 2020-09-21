@@ -1,13 +1,13 @@
 {
-    "name": "deadphoenix/web",
+    "name": "deadphoenix/homebrew.space",
     "type": "project",
     "require": {
-        "twig/twig": "^2.0",
-        "symfony/yaml": "^4.0"
+        "twig/twig": "^3.0",
+        "symfony/yaml": "^5.0"
     },
     "autoload": {
         "psr-4": {
-            "HomebrewDB\\": "src/"
+            "HomebrewSpace\\": "src/"
         }
     }
 }
