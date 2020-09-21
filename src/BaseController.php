@@ -1,6 +1,6 @@
 <?php
 
-namespace HomebrewSpace;
+namespace HomebrewDB;
 
 
 abstract class BaseController {

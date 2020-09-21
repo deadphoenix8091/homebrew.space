@@ -1,5 +1,5 @@
 <?php
-namespace HomebrewSpace;
+namespace HomebrewDB;
 
 class SessionManager
 {

@@ -6,11 +6,17 @@ RUN apt-get update && apt-get install vim -y && \
     apt-get install wget -y && \
     apt-get install git -y && \
     apt-get install procps -y && \
-    apt-get install htop -y
+    apt-get install htop -y && \
+    apt-get install npm -y
+
+RUN apt-get install -y \
+    libzip-dev \
+    zip \
+  && docker-php-ext-install zip
 
 RUN cd /tmp && git clone https://github.com/swoole/swoole-src.git && \
     cd swoole-src && \
-    git checkout v4.5.4 && \
+    git checkout v4.4.15 && \
     phpize  && \
     ./configure  --enable-openssl && \
     make && make install
@@ -23,6 +29,18 @@ RUN chmod +x /usr/local/bin/dumb-init
 
 RUN apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
-ADD . /code
+RUN docker-php-ext-install pdo_mysql
 
-ENTRYPOINT ["/usr/local/bin/dumb-init", "--", "php", "/code/server.php"]
+ADD . /app
+
+RUN cd /app && \
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php composer-setup.php && \
+    php -r "unlink('composer-setup.php');" && \
+    php composer.phar install && \
+    npm install && \
+    npm run build
+
+ENTRYPOINT ["/usr/local/bin/dumb-init", "--"]
+WORKDIR /app
+CMD ["php", "/app/server.php"]

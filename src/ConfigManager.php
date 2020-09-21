@@ -1,6 +1,6 @@
 <?php
 
-namespace HomebrewSpace;
+namespace HomebrewDB;
 
 use Symfony\Component\Yaml\Yaml;
 

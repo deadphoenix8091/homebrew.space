@@ -1,9 +1,9 @@
 <?php
 
-namespace HomebrewSpace\Controllers;
+namespace HomebrewDB\Controllers;
 
-use HomebrewSpace\BaseController;
-use HomebrewSpace\DatabaseManager;
+use HomebrewDB\BaseController;
+use HomebrewDB\DatabaseManager;
 
 class QRController extends BaseController {
     public function indexAction() {

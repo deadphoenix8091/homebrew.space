@@ -1,11 +1,11 @@
 <?php
 
-namespace HomebrewSpace\Controllers;
+namespace HomebrewDB\Controllers;
 
-use HomebrewSpace\BaseController;
-use HomebrewSpace\CIAParser;
-use HomebrewSpace\ConfigManager;
-use HomebrewSpace\DatabaseManager;
+use HomebrewDB\BaseController;
+use HomebrewDB\CIAParser;
+use HomebrewDB\ConfigManager;
+use HomebrewDB\DatabaseManager;
 
 class ReleasesCronjobController extends BaseController {
     public function updateReleases($app) {

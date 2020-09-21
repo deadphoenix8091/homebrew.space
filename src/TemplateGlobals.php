@@ -1,6 +1,6 @@
 <?php
 
-namespace HomebrewSpace;
+namespace HomebrewDB;
 
 class TemplateGlobals {
     private static function FetchCategories() {
