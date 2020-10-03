@@ -27,7 +27,7 @@ abstract class BaseController {
             $viewData = [$viewData];
         }
         $viewData = array_merge($viewData, TemplateGlobals::BuildGlobals());
-        return $this->router->twigEnvironment->render($this->viewFolder . '/' . $actionName . '.html', $viewData);
+        return json_encode($viewData);
     }
 
     public function Redirect($targetUrl) {

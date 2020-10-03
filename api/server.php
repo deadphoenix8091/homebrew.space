@@ -1,9 +1,13 @@
 <?php
 
 use HomebrewSpace\Controllers\StaticFileController;
+use HomebrewSpace\Models\Application;
+
+require_once './vendor/autoload.php';
 
 chdir('/code');
-require_once './vendor/autoload.php';
+$sch = new Swoole\Coroutine\Scheduler();
+$sch->set(['hook_flags' => SWOOLE_HOOK_ALL]);
 
 $http = new \Swoole\HTTP\Server("0.0.0.0", 80);
 
@@ -36,7 +40,7 @@ $http->on('request', function ($request, $response) use ($twig) {
     }
 
     $router = new \HomebrewSpace\Router($twig);
-    $response->header("Content-Type", "text/html");
+    $response->header("Content-Type", "application/json");
     $response->end($router->process($request));
 });
 

@@ -5,11 +5,18 @@ namespace HomebrewSpace\Controllers;
 use HomebrewSpace\BaseController;
 use HomebrewSpace\ConfigManager;
 use HomebrewSpace\DatabaseManager;
+use HomebrewSpace\Models\Application;
 
 class HomeController extends BaseController {
     protected $viewFolder = 'home';
 
     protected function getViewData($categoryId, $title) {
+        $applications = Application::FindAll();
+        return [
+            'title' => "Applications in Category \"" . $title . "\"",
+            "applications" => $applications
+        ];
+        /*
         $stmt = null;
         if ($categoryId == 1 || $categoryId == -1) {
             $stmt = DatabaseManager::Prepare("select app.*, app_releases.name from app join app_releases on (app_releases.id = (select ap.id from app_releases ap where ap.app_id = app.id order by ap.prerelease asc, ap.created_at desc limit 1)) where app.state = 1 order by app_releases.created_at desc");
@@ -40,7 +47,7 @@ class HomeController extends BaseController {
         return [
             'title' => "Applications in Category \"" . $title . "\"",
             "applications" => $applications
-        ];
+        ];*/
     }
 
     public function indexAction() {

@@ -34,12 +34,13 @@ class QRController extends BaseController {
         if ($release !== false) {
             header('Content-Type: image/png');
             header("Content-Transfer-Encoding: Binary");
-	    header("Cache-Control: max-age=2592000"); //30 days max age
-	    header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + (60 * 60 * 24 * 30))); // 30 days
+            header("Cache-Control: max-age=2592000"); //30 days max age
+            header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + (60 * 60 * 24 * 30))); // 30 days
             $qrRaw = base64_decode($release['qr_code']);
             header("Content-Length: " . strlen($qrRaw));
             echo $qrRaw;
             exit;
+            
         }
 
         echo "invalid qr url";

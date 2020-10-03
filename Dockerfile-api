@@ -24,20 +24,20 @@ RUN cd /tmp && git clone https://github.com/swoole/swoole-src.git && \
 RUN touch /usr/local/etc/php/conf.d/swoole.ini && \
     echo 'extension=swoole.so' > /usr/local/etc/php/conf.d/swoole.ini
 
+RUN docker-php-ext-install pdo_mysql
+
 RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64
 RUN chmod +x /usr/local/bin/dumb-init
 
 RUN apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
-ADD . /code
+ADD ./api /code
 WORKDIR /code
 
-RUN cd /app && \
+RUN cd /code && \
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php && \
     php -r "unlink('composer-setup.php');" && \
-    php composer.phar install && \
-    npm install && \
-    npm run build
-    
-ENTRYPOINT ["/usr/local/bin/dumb-init", "--", "php"]
+    php composer.phar install
+
+ENTRYPOINT ["/usr/local/bin/dumb-init", "--", "php", "server.php"]

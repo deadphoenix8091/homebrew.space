@@ -10,6 +10,11 @@ class ConfigManager {
 
     public static function GetConfiguration($key, $defaultValue = '') {
         //Key is dot seperated for levels
+        $transformedKey = mb_strtoupper(preg_replace('/\./', '_', $key));
+        if (isset($_ENV[$transformedKey])) {
+            return $_ENV[$transformedKey];
+        }
+
         $returnValue = $defaultValue;
         if (self::$configArray === null) {
             //Load config from yaml file

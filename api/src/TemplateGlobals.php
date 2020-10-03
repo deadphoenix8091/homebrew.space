@@ -23,7 +23,7 @@ class TemplateGlobals {
 
     public static function BuildGlobals() {
         return [
-            'categories' => self::FetchCategories()
+            'categories' => []//self::FetchCategories()
         ];
     }
 }
