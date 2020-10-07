@@ -59,10 +59,9 @@ class DatabaseManager {
     }
 
     public static function ImportSeedData($importData) {
-        return;
         if (!self::IsConnected()) if (!self::Connect()) return;
         if (self::GetIndex(Application::GetDatabaseIndexName())->exists()) {
-            self::GetIndex(Application::GetDatabaseIndexName())->delete();
+            return;
         }
 
         $applications = [];
