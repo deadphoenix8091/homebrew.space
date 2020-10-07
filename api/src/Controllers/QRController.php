@@ -2,6 +2,7 @@
 
 namespace HomebrewSpace\Controllers;
 
+use chillerlan\QRCode\QRCode;
 use HomebrewSpace\BaseController;
 use HomebrewSpace\DatabaseManager;
 use HomebrewSpace\Models\Application;
@@ -21,7 +22,7 @@ class QRController extends BaseController {
             && isset($application->latestRelease['3ds_release_files'])
             && count($application->latestRelease['3ds_release_files']) > 0 ) {
             $url = $application->latestRelease['3ds_release_files'][0]['download_url'];
-            $data = (new \chillerlan\QRCode)->render($url);
+            $data = (new QRCode())->render($url);
             $response->header("Content-Type", "image/png");
             $response->end($data);
         } else {
