@@ -8,3 +8,4 @@ package-lock.json
 /config.yaml
 /moderation
 /web
+development-compose.yml

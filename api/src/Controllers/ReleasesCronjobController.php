@@ -17,7 +17,7 @@ class ReleasesCronjobController extends BaseController {
         curl_setopt($ch,CURLOPT_USERAGENT,'deadphoenix8091');
         curl_setopt($ch, CURLOPT_URL,$githubReleasesApiUrl);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization: token '
+            'Authorization: token ' . ConfigManager::GetConfiguration('github.token')
         ));
         $result=curl_exec($ch);
         curl_close($ch);
