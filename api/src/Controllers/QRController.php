@@ -19,7 +19,7 @@ class QRController extends BaseController {
 
         if ($application 
             && isset($application->latestRelease['3ds_release_files'])
-            && isset($application->latestRelease['3ds_release_files'][0]) ) {
+            && count($application->latestRelease['3ds_release_files']) > 0 ) {
             $url = $application->latestRelease['3ds_release_files'][0]['download_url'];
             $data = (new \chillerlan\QRCode)->render($url);
             $response->header("Content-Type", "image/png");
