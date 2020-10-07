@@ -42,9 +42,9 @@ class HomeController extends BaseController {
             unset($rawData['releases']);
             return $rawData;
         }, $applications['hits']['hits']);
-        $applications = array_filter($applications, function ($currentApplicationData) {
+        $applications = array_values(array_filter($applications, function ($currentApplicationData) {
             return count($currentApplicationData['latestRelease']['3ds_release_files']) > 0;
-        });
+        }));
         return $applications;
     }
 
