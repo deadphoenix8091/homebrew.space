@@ -15,7 +15,7 @@ class QRController extends BaseController {
             $response->status = 404;
         }
 
-        $application = Application::Get($urlSegments[1];
+        $application = Application::Get($urlSegments[1]);
 
         if ($application 
             && isset($application->latestRelease['3ds_release_files'])
