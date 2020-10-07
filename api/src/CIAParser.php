@@ -27,7 +27,7 @@ class CIAParser {
         return $color;
     }
 
-    private static function readPixel($fileHandle, $image){
+    private static function readPixel($fileHandle){
         $rgb565PixelData = bin2hex(strrev(fread($fileHandle, 2)));
         $rgb565PixelData = str_pad(base_convert($rgb565PixelData, 16, 2), 16, '0', STR_PAD_LEFT);
         $red = substr($rgb565PixelData, 0, 5);
@@ -36,7 +36,7 @@ class CIAParser {
         $green = (int)round((bindec($green) / (pow(2, 6) - 1)) * 255);
         $blue = substr($rgb565PixelData, 11, 5);
         $blue = (int)round((bindec($blue) / (pow(2, 5) - 1)) * 255);
-        return self::createcolor($image, $red, $green, $blue);
+        return array($red, $green, $blue);
     }
 
     private static function read8x8Tile($image, $fileHandle, $dstX, $dstY) {
@@ -44,21 +44,25 @@ class CIAParser {
             for($tileOuterX = 0; $tileOuterX < 2; $tileOuterX++) {
                 for($tileInnerY = 0; $tileInnerY < 2; $tileInnerY++) {
                     for($tileInnerX = 0; $tileInnerX < 2; $tileInnerX++) {
-                        $rgb565PixelData = self::readPixel($fileHandle, $image);
-                        imagesetpixel($image, $dstX + $tileOuterX * 4 + $tileInnerX * 2 + 0, $dstY + $tileOuterY * 4 + $tileInnerY * 2 + 0, $rgb565PixelData);
-                        $rgb565PixelData = self::readPixel($fileHandle, $image);
-                        imagesetpixel($image, $dstX + $tileOuterX * 4 + $tileInnerX * 2 + 1, $dstY + $tileOuterY * 4 + $tileInnerY * 2 + 0, $rgb565PixelData);
-                        $rgb565PixelData = self::readPixel($fileHandle, $image);
-                        imagesetpixel($image, $dstX + $tileOuterX * 4 + $tileInnerX * 2 + 0, $dstY + $tileOuterY * 4 + $tileInnerY * 2 + 1, $rgb565PixelData);
-                        $rgb565PixelData = self::readPixel($fileHandle, $image);
-                        imagesetpixel($image, $dstX + $tileOuterX * 4 + $tileInnerX * 2 + 1, $dstY + $tileOuterY * 4 + $tileInnerY * 2 + 1, $rgb565PixelData);
+                        $xOffset = $dstX + $tileOuterX * 4 + $tileInnerX * 2;
+                        $yOffset = $dstY + $tileOuterY * 4 + $tileInnerY * 2;
+                        $rgb565PixelData1 = self::readPixel( $fileHandle, $image );
+                        $rgb565PixelData2 = self::readPixel( $fileHandle, $image );
+                        $rgb565PixelData3 = self::readPixel( $fileHandle, $image );
+                        $rgb565PixelData4 = self::readPixel( $fileHandle, $image );
+                        $image->importImagePixels($xOffset, $yOffset, 2, 2, "RGB", \Imagick::PIXEL_CHAR, array(
+                            $rgb565PixelData1[0] , $rgb565PixelData1[1] , $rgb565PixelData1[2],
+                            $rgb565PixelData2[0] , $rgb565PixelData2[1] , $rgb565PixelData2[2],
+                            $rgb565PixelData3[0] , $rgb565PixelData3[1] , $rgb565PixelData3[2],
+                            $rgb565PixelData4[0] , $rgb565PixelData4[1] , $rgb565PixelData4[2],
+                        ));
                     }
                 }
             }
         }
     }
 
-    public static function GetMetadata($fileHandle) {
+    public static function GetMetadata($fileHandle, $fileSize) {
         $archiveHeaderSize = unpack('V', fread($fileHandle, 4))[1];
         fseek($fileHandle, 0);
 
@@ -84,6 +88,8 @@ class CIAParser {
         ];
         $signatureDataSize = $signatureSizes[$signatureType];
 
+        if ($fileSize < ($tmdStartOffset + self::blockAlign($signatureDataSize + 4, 0x40) + 0xc4)) return false;
+        
         fseek($fileHandle, $tmdStartOffset + self::blockAlign($signatureDataSize + 4, 0x40));
         $tmdHeader = fread($fileHandle, 0xC4);
         $tmdHeaderData = unpack(
@@ -114,17 +120,20 @@ class CIAParser {
         $exefsFileMap = [];
 
         for($i = 0; $i < 10; $i++) {
-            fseek($fileHandle, $tmdStartOffset + self::blockAlign($ciaHeaderData['tmd_file_size'] + 4, 0x40) + $exeFsOffset * 0x200 + $i * 16);
-            $fileName = str_replace("\00", '', fread($fileHandle, 8));
-            $fileOffset = unpack('V', fread($fileHandle, 4))[1];
-            $fileSize = unpack('V', fread($fileHandle, 4))[1];
+            $offsetInFile = $tmdStartOffset + self::blockAlign($ciaHeaderData['tmd_file_size'] + 4, 0x40) + $exeFsOffset * 0x200 + $i * 16;
+            if ($fileSize >= $offsetInFile + 16) {
+                fseek($fileHandle, $offsetInFile);
+                $fileName = str_replace("\00", '', @fread($fileHandle, 8));
+                $fileOffset = unpack('V', @fread($fileHandle, 4))[1];
+                $fileEntrySize = unpack('V', @fread($fileHandle, 4))[1];
 
-            if ($fileSize > 0) {
-                $exefsFileMap[$fileName] = [
-                    'name' => $fileName,
-                    'offset' => $fileOffset,
-                    'size' => $fileSize
-                ];
+                if ($fileEntrySize > 0) {
+                    $exefsFileMap[$fileName] = [
+                        'name' => $fileName,
+                        'offset' => $fileOffset,
+                        'size' => $fileEntrySize
+                    ];
+                }
             }
         }
 
@@ -135,7 +144,11 @@ class CIAParser {
         $englishLongDescription = str_replace("\00", '', mb_convert_encoding(fread($fileHandle, 0x100), "UTF-8", "UTF-16LE"));
         $englishPublisher = str_replace("\00", '', mb_convert_encoding(fread($fileHandle, 0x80), "UTF-8", "UTF-16LE"));
 
-        $smallIcon = imagecreate(24, 24);
+        $smallIcon = new \Imagick();
+        $smallIcon->newImage(24, 24, new \ImagickPixel('red'));
+        $smallIcon->setImageFormat('png');
+
+        //$smallIcon = imagecreate(24, 24);
         fseek($fileHandle, $smdhFileOffset + 0x2040);
 
         for($y = 0; $y < 3; $y++) {
@@ -143,7 +156,12 @@ class CIAParser {
                 self::read8x8Tile($smallIcon, $fileHandle, $x * 8, $y * 8);
             }
         }
-        $bigIcon = imagecreate(48, 48);
+
+        $bigIcon = new \Imagick();
+        $bigIcon->newImage(48, 48, new \ImagickPixel('red'));
+        $bigIcon->setImageFormat('png');
+
+        //$bigIcon = imagecreate(48, 48);
         fseek($fileHandle, $smdhFileOffset + 0x24C0);
         for($y = 0; $y < 6; $y++) {
             for($x = 0; $x < 6; $x++) {
@@ -152,14 +170,14 @@ class CIAParser {
         }
 
         ob_start ();
-        imagejpeg ($smallIcon);
-        imagedestroy ($smallIcon);
+        echo $smallIcon;
+        $smallIcon->clear();
         $smallIconRawJPEG = ob_get_contents ();
         ob_end_clean ();
 
         ob_start ();
-        imagejpeg ($bigIcon);
-        imagedestroy ($bigIcon);
+        echo $bigIcon;
+        $bigIcon->clear();
         $bigIconRawJPEG = ob_get_contents ();
         ob_end_clean ();
 

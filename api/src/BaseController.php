@@ -19,14 +19,14 @@ abstract class BaseController {
         $this->router = $router;
     }
 
-    public function process($actionName) {
+    public function process($request, $response, $actionName) {
         //@TODO: Proper action name validation
         $actionMethodName = $actionName . "Action";
-        $viewData = $this->$actionMethodName();
+        $viewData = $this->$actionMethodName($request, $response);
         if (!is_array($viewData)) {
             $viewData = [$viewData];
         }
-        $viewData = array_merge($viewData, TemplateGlobals::BuildGlobals());
+        //$viewData = array_merge($viewData, TemplateGlobals::BuildGlobals());
         return json_encode($viewData);
     }
 

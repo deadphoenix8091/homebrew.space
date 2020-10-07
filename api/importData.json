@@ -1,0 +1,473 @@
+[{
+    "links": ["/dl/7/22075140/Checkpoint.cia", "https://github.com/FlagBrew/Checkpoint"],
+    "projectInfo": "Description: Fast and simple save manager\nTID: 000400000bcfff00\nLast Updated: 12/09/2019",
+    "title": "Checkpoint"
+}, {
+    "links": ["/dl/40/21342188/BootNTRSelector-FONZD-Banner.cia", "https://github.com/Nanquitas/BootNTR"],
+    "projectInfo": "Description: Boot NTR Selector - Enhanced NTR CFW Loader\nTID: 000400000eb00000\nLast Updated: 11/09/2019",
+    "title": "Boot NTR Selector"
+}, {
+    "links": ["/dl/272/21335899/Universal-Updater.cia", "https://github.com/Universal-Team/Universal-Updater"],
+    "projectInfo": "Description: A universally good updater!\nTID: 0004000004391700\nLast Updated: 11/09/2019",
+    "title": "Universal-Updater"
+}, {
+    "links": ["/dl/269/21104475/OpenBOR.cia", "https://github.com/MrHuu/openbor-3ds"],
+    "projectInfo": "Description: OpenBOR\nTID: 000400000b043d00\nLast Updated: 10/30/2019",
+    "title": "OpenBOR"
+}, {
+    "links": ["/dl/111/20838949/mgba.cia", "https://github.com/mgba-emu/mgba"],
+    "projectInfo": "Description: mGBA Game Boy Advance Emulator\nTID: 00040000001a1e00\nLast Updated: 10/20/2019",
+    "title": "mGBA"
+}, {
+    "links": ["/dl/176/20000525/ftpd.cia", "https://github.com/mtheall/ftpd"],
+    "projectInfo": "Description: v2.3.1-00c2c442\nTID: 000400000beef500\nLast Updated: 09/15/2019",
+    "title": "ftpd snap!"
+}, {
+    "links": ["/dl/4/19889777/PKSM.cia", "https://github.com/FlagBrew/PKSM"],
+    "projectInfo": "Description: Gen IV to Gen VII save manager\nTID: 000400000ec10000\nLast Updated: 09/10/2019",
+    "title": "PKSM"
+}, {
+    "links": ["/dl/273/19424011/LeafEdit.cia", "https://github.com/Universal-Team/LeafEdit"],
+    "projectInfo": "Description: LeafEdit\nTID: 0004000004392100\nLast Updated: 08/21/2019",
+    "title": "LeafEdit"
+}, {
+    "links": ["/dl/258/19426315/TWiLightMenu-Updater.cia", "https://github.com/RocketRobz/TWiLightMenu-Updater"],
+    "projectInfo": "Description: TWiLight Menu++ Updater\nTID: 0004000004395500\nLast Updated: 08/14/2019",
+    "title": "TWiLight Menu++ Updater"
+}, {
+    "links": ["/dl/103/18312529/lumaupdater.cia", "https://github.com/KunoichiZ/lumaupdate"],
+    "projectInfo": "Description: Updater for Luma3DS releases\nTID: 00040000001deb00\nLast Updated: 06/29/2019",
+    "title": "Luma3DS Updater"
+}, {
+    "links": ["/dl/10/18255121/3DShell.cia", "https://github.com/joel16/3DShell"],
+    "projectInfo": "Description: Multi-purpose file manager\nTID: 0004000001620000\nLast Updated: 06/27/2019",
+    "title": "3DShell"
+}, {
+    "links": ["/dl/267/17681384/Idiot.cia", "https://github.com/HIDE810/you-are-an-idiot"],
+    "projectInfo": "Description: You are an idiot!\nTID: 0004000003231200\nLast Updated: 05/30/2019",
+    "title": "You are an idiot!"
+}, {
+    "links": ["/dl/268/17593577/WiFi.cia", "https://github.com/HIDE810/WiFi-Status-Checker"],
+    "projectInfo": "Description: WiFi status checker\nTID: 0004000000123200\nLast Updated: 05/26/2019",
+    "title": "WiFi Status Checker"
+}, {
+    "links": ["/dl/166/17231961/sbfm.cia", "https://github.com/Trinitro21/lpp-3ds"],
+    "projectInfo": "Description: SmileBASIC File Manager\nTID: 00040000005bf300\nLast Updated: 05/08/2019",
+    "title": "SmileBASIC File Manager"
+}, {
+    "links": ["/dl/141/21351431/prboom3ds.cia", "https://github.com/elhobbs/prboom3ds"],
+    "projectInfo": "Description: prboom3ds\nTID: 000400000f003200\nLast Updated: 05/02/2019",
+    "title": "prboom3ds"
+}, {
+    "links": ["/dl/259/16464424/RGB.cia", "https://github.com/MechanicalDragon0687/MCU_Bricker_tinydb"],
+    "projectInfo": "Description: MCU Bricker\nTID: 000400000dead100\nLast Updated: 04/01/2019",
+    "title": "RGB"
+}, {
+    "links": ["/dl/257/16231214/3DS_Battery_Checker.cia", "https://github.com/Core-2-Extreme/3DS-Battery-Checker"],
+    "projectInfo": "Description: Check your 3DS battery\nTID: 000400000bc9300f\nLast Updated: 03/20/2019",
+    "title": "3DS Battery Checker"
+}, {
+    "links": ["/dl/253/15333814/GYTB.cia", "https://github.com/MechanicalDragon0687/GYTB"],
+    "projectInfo": "Description: GYTB\nTID: 00040000001ddb00\nLast Updated: 02/02/2019",
+    "title": "GYTB"
+}, {
+    "links": ["/dl/1/14760202/FBI.cia", "https://github.com/Steveice10/FBI"],
+    "projectInfo": "Description: FBI - Open source title manager.\nTID: 000400000f800100\nLast Updated: 01/02/2019",
+    "title": "FBI"
+}, {
+    "links": ["/dl/219/14756746/DDLC-3DS.cia", "https://github.com/LukeZGD/DDLC-LOVE"],
+    "projectInfo": "Description: An unofficial DDLC port for the 3DS!\nTID: 0004000000ddfc00\nLast Updated: 01/01/2019",
+    "title": "DDLC-3DS"
+}, {
+    "links": ["/dl/228/14708244/OpenTitus.cia", "https://github.com/MrHuu/opentitus"],
+    "projectInfo": "Description: A port of the game engine behind the DOS versions of Titus the Fox and Moktar\nTID: 000400000ff34100\nLast Updated: 12/27/2018",
+    "title": "OpenTitus"
+}, {
+    "links": ["/dl/2/14652800/JKSM.cia", "https://github.com/J-D-K/JKSM"],
+    "projectInfo": "Description: JK's Save Manager\nTID: 0004000002c23200\nLast Updated: 12/21/2018",
+    "title": "JK's Save Manager"
+}, {
+    "links": ["/dl/243/13704882/TJAPlayer_for_3DS.cia", "https://github.com/togetg/TJAPlayer_for_3DS"],
+    "projectInfo": "Description: Music game of the TJA file.\nTID: 0004000000b76765\nLast Updated: 10/29/2018",
+    "title": "TJAPlayer for 3DS"
+}, {
+    "links": ["/dl/5/13398029/DSES.cia", "https://github.com/noirscape/dses"],
+    "projectInfo": "Description: Dead Simple Eula Set\nTID: 000400000ef10200\nLast Updated: 10/12/2018",
+    "title": "DSES"
+}, {
+    "links": ["/dl/261/13164743/ModMoon.cia", "https://github.com/Swiftloke/ModMoon"],
+    "projectInfo": "Description: ModMoon: Mods Manager for 3DS\nTID: 0004000000a73a00\nLast Updated: 09/29/2018",
+    "title": "ModMoon"
+}, {
+    "links": ["/dl/159/12370747/SFontT.cia", "https://github.com/dnasdw/SharedFontTool"],
+    "projectInfo": "Description: SFontT - Shared Font Tool\nTID: 000400000f000100\nLast Updated: 08/13/2018",
+    "title": "SFontT"
+}, {
+    "links": ["/dl/9/12237265/3DSident-GUI.cia", "https://github.com/joel16/3DSident"],
+    "projectInfo": "Description: Identity tool for the Nintendo 3DS.\nTID: 0004000001610000\nLast Updated: 08/03/2018",
+    "title": "3DSident-GUI"
+}, {
+    "links": ["/dl/76/12154238/FriendMii.cia", "https://github.com/joel16/FriendMii"],
+    "projectInfo": "Description: Open source friends app\nTID: 0004000001606600\nLast Updated: 07/29/2018",
+    "title": "FriendMii"
+}, {
+    "links": ["/dl/225/12125805/Homebrew_Launcher.cia", "https://github.com/mariohackandglitch/homebrew_launcher_dummy"],
+    "projectInfo": "Description: Homebrew Launcher - HBL\nTID: 000400000d921e00\nLast Updated: 07/26/2018",
+    "title": "Homebrew Launcher"
+}, {
+    "links": ["/dl/247/11675957/Yahtzee3DS.cia", "https://github.com/LiquidFenrir/Yahtzee3DS"],
+    "projectInfo": "Description: Play Yahtzee on your 3DS with up to 6 players!\nTID: 0004000001473300\nLast Updated: 06/27/2018",
+    "title": "Yahtzee3DS"
+}, {
+    "links": ["/dl/3/11093355/QRaken.cia", "https://github.com/FlagBrew/QRaken"],
+    "projectInfo": "Description: PoC QR Code Scanner\nTID: 000400000bc0de00\nLast Updated: 05/21/2018",
+    "title": "QRaken"
+}, {
+    "links": ["/dl/8/10975765/Anemone3DS.cia", "https://github.com/astronautlevel2/Anemone3DS"],
+    "projectInfo": "Description: A complete theming tool for the 3DS\nTID: 00040000000afe00\nLast Updated: 05/13/2018",
+    "title": "Anemone3DS"
+}, {
+    "links": ["/dl/233/11973752/Pickr.cia", "https://github.com/FlagBrew/Pickr"],
+    "projectInfo": "Description: Pickr port for 3DS\nTID: 0004000001cf0000\nLast Updated: 04/14/2018",
+    "title": "Pickr"
+}, {
+    "links": ["/dl/239/10541906/SRAU.cia", "https://github.com/noirscape/SRAU"],
+    "projectInfo": "Description: Samus Returns Amiibo Unlocker\nTID: 000400000ef10100\nLast Updated: 04/13/2018",
+    "title": "SRAU"
+}, {
+    "links": ["/dl/151/10245962/RipEXAnim3DS.cia", "https://github.com/darkxex/ripex3ds"],
+    "projectInfo": "Description: RipEXAnim3DS\nTID: 0004000000897900\nLast Updated: 03/25/2018",
+    "title": "RipEXAnim3DS"
+}, {
+    "links": ["/dl/170/10240995/snes9x_3ds.cia", "https://github.com/bubble2k16/snes9x_3ds"],
+    "projectInfo": "Description: SNES9X for 3DS\nTID: 0004000000384900\nLast Updated: 03/23/2018",
+    "title": "SNES9X"
+}, {
+    "links": ["/dl/201/10175611/virtuanes_3ds.cia", "https://github.com/bubble2k16/emus3ds"],
+    "projectInfo": "Description: VirtuaNES for 3DS\nTID: 0004000000384a00\nLast Updated: 03/20/2018",
+    "title": "VirtuaNES"
+}, {
+    "links": ["/dl/6/10116374/Cthulhu.cia", "https://github.com/Ryuzaki-MrL/Cthulhu"],
+    "projectInfo": "Description: Cache Tool\nTID: 0004000009889900\nLast Updated: 03/16/2018",
+    "title": "Cthulhu"
+}, {
+    "links": ["/dl/158/9784735/seedstarter.cia", "https://github.com/zoogie/seedminer"],
+    "projectInfo": "Description: Gather data for seedMiner\nTID: 0004000005333d00\nLast Updated: 02/22/2018",
+    "title": "seedStarter"
+}, {
+    "links": ["/dl/26/9722421/3DS_Recovery_Tool.cia", "https://github.com/joel16/3DS-Recovery-Tool"],
+    "projectInfo": "Description: Restore and backup misc data\nTID: 0004000001660000\nLast Updated: 02/18/2018",
+    "title": "3DS Recovery Tool"
+}, {
+    "links": ["/dl/221/9423616/eBook_Reader.cia", "https://github.com/DomRe/3DS_eBook_Reader"],
+    "projectInfo": "Description: Read eBooks on your 3DS!\nTID: 000400000eb11100\nLast Updated: 01/27/2018",
+    "title": "eBook Reader"
+}, {
+    "links": ["/dl/155/9515482/screenshot-merge1.4.cia", "https://github.com/ihaveamac/screenshot-merge"],
+    "projectInfo": "Description: screenshot merge\nTID: 000400000f0acc00\nLast Updated: 01/25/2018",
+    "title": "screenshot merge"
+}, {
+    "links": ["/dl/204/9244951/WifiManager.cia", "https://github.com/LiquidFenrir/WifiManager"],
+    "projectInfo": "Description: Backup and restore your WiFi slots!\nTID: 00040000005dc900\nLast Updated: 01/15/2018",
+    "title": "WifiManager"
+}, {
+    "links": ["/dl/134/9255181/picodrive_3ds.cia", "https://github.com/bubble2k16/picodrive_3ds"],
+    "projectInfo": "Description: PicoDrive\nTID: 0004000000384c00\nLast Updated: 01/07/2018",
+    "title": "PicoDrive"
+}, {
+    "links": ["/dl/88/9080645/HexIsoPath.cia", "https://github.com/LiquidFenrir/HexIsoPath"],
+    "projectInfo": "Description: A strategic board game with hexagons!\nTID: 0004000005831600\nLast Updated: 01/02/2018",
+    "title": "HexIsoPath"
+}, {
+    "links": ["/dl/122/8797557/Notepad3DS.cia", "https://github.com/RMcTn/Notepad3DS"],
+    "projectInfo": "Description: Notepad3DS\nTID: 000400000fd3ff00\nLast Updated: 12/06/2017",
+    "title": "Notepad3DS"
+}, {
+    "links": ["/dl/63/8511670/drider.cia", "https://github.com/ingolemo/drider"],
+    "projectInfo": "Description: Drider epub reader\nTID: 0004000000d81d00\nLast Updated: 11/14/2017",
+    "title": "Drider"
+}, {
+    "links": ["/dl/69/8477373/FastPlayCoin.cia", "https://github.com/CorySanin/FastPlayCoin"],
+    "projectInfo": "Description: Fast PlayCoin - 300 coins NOW\nTID: 00040000000f9800\nLast Updated: 11/11/2017",
+    "title": "Fast PlayCoin"
+}, {
+    "links": ["/dl/130/8299142/PayloadSpinner3DS.cia", "https://github.com/BEPISMAN2/PayloadSpinner3DS"],
+    "projectInfo": "Description: PayloadSpinner3DS\nTID: 000400000028a900\nLast Updated: 10/28/2017",
+    "title": "PayloadSpinner3DS"
+}, {
+    "links": ["/dl/34/8109400/Anim3DS.cia", "https://github.com/Manurocker95/Anim3DS"],
+    "projectInfo": "Description: Anim3DS\nTID: 000400000fac6c00\nLast Updated: 10/13/2017",
+    "title": "Anim3DS"
+}, {
+    "links": ["/dl/211/7869686/Zelda3T_v1.0.cia", "https://github.com/nop90/Zelda3T"],
+    "projectInfo": "Description: Zelda Time to Triumph\nTID: 0004000000997400\nLast Updated: 09/24/2017",
+    "title": "Zwlda3T"
+}, {
+    "links": ["/dl/42/7703464/bottomless-block-barrage.cia", "https://github.com/TricksterGuy/bottomless-block-barrage"],
+    "projectInfo": "Description: Bottomless Block Barrage\nTID: 000400000b0b1b00\nLast Updated: 09/11/2017",
+    "title": "Bottomless Block Barrage"
+}, {
+    "links": ["/dl/194/7532252/TRekt_3D.cia", "https://github.com/Manurocker95/TRekt_3D"],
+    "projectInfo": "Description: T-Rekt 3D\nTID: 000400000fac4c00\nLast Updated: 08/26/2017",
+    "title": "T-Rekt 3D"
+}, {
+    "links": ["/dl/53/7494380/craftus-0.22.cia", "https://github.com/RSDuck/craftus_reloaded"],
+    "projectInfo": "Description: A Minecraft clone for 3DS\nTID: 000400000fab2400\nLast Updated: 08/23/2017",
+    "title": "Craftus Reloaded"
+}, {
+    "links": ["/dl/67/7492342/Evolution_Sav3D_Me.cia", "https://github.com/Manurocker95/Evolution_Sav3D_Me"],
+    "projectInfo": "Description: Evolution_Sav3D_Me\nTID: 000400000fac1c00\nLast Updated: 08/23/2017",
+    "title": "Evolution_Sav3D_Me"
+}, {
+    "links": ["/dl/119/7358404/nds-hb-menu.cia", "https://github.com/zoogie/Stuff"],
+    "projectInfo": "Description: built with devkitARM\nTID: 0004000000715300\nLast Updated: 08/11/2017",
+    "title": "nds-hb-menu bootstrap"
+}, {
+    "links": ["/dl/33/7316693/ami2.cia", "https://github.com/moriczgergo/ami2"],
+    "projectInfo": "Description: ami2 - Amiibo Duplicator\nTID: 000400000fa11200\nLast Updated: 08/08/2017",
+    "title": "ami2"
+}, {
+    "links": ["/dl/154/7228747/RTChanger-Version1.0.cia", "https://github.com/Storm-Eagle20/RTChanger"],
+    "projectInfo": "Description: A tool which can change the Raw RTC to bypass timegates!\nTID: 0004000000fccc00\nLast Updated: 07/31/2017",
+    "title": "RTChanger"
+}, {
+    "links": ["/dl/72/7158654/Forecast.cia", "https://github.com/NatTupper/Forecast"],
+    "projectInfo": "Description: Forecast\nTID: 000400000e2c7700\nLast Updated: 07/25/2017",
+    "title": "Forecast"
+}, {
+    "links": ["/dl/56/6974349/ctrmus.cia", "https://github.com/deltabeard/ctrmus"],
+    "projectInfo": "Description: ctrmus - 3DS Music Player\nTID: 000400000ff3cc00\nLast Updated: 07/08/2017",
+    "title": "ctrmus"
+}, {
+    "links": ["/dl/270/6899320/3dfetch.cia", "https://github.com/aliceinpalth/3dfetch"],
+    "projectInfo": "Description: 3dfetch\nTID: 0004000009f99e00\nLast Updated: 07/04/2017",
+    "title": "3dfetch"
+}, {
+    "links": ["/dl/45/6795428/ButtonPresser3DS.cia", "https://github.com/trainboy2019/ButtonPresser3DS"],
+    "projectInfo": "Description: Is this good?\nTID: 0004000000463000\nLast Updated: 06/22/2017",
+    "title": "ButtonPresser3DS"
+}, {
+    "links": ["/dl/145/6824457/Quake2CTR.cia", "https://github.com/masterfeizz/Quake2CTR"],
+    "projectInfo": "Description: Quake 2\nTID: 000400000ff12500\nLast Updated: 06/22/2017",
+    "title": "Quake 2"
+}, {
+    "links": ["/dl/120/6715441/neopop_v0.4.cia", "https://github.com/nop90/Neopop-SDL"],
+    "projectInfo": "Description: Neo Geo Pocket Color emulator\nTID: 0004000000998600\nLast Updated: 06/14/2017",
+    "title": "Neopop"
+}, {
+    "links": ["/dl/49/6673982/CookieClicker.cia", "https://github.com/Creckeryop/3dsCookieClicker"],
+    "projectInfo": "Description: Cookie Clicker port for 3DS\nTID: 0004000000f23f00\nLast Updated: 06/11/2017",
+    "title": "Cookie Clicker"
+}, {
+    "links": ["/dl/208/6638614/ZeldaOLB_v1.1.cia", "https://github.com/nop90/ZeldaOLB"],
+    "projectInfo": "Description: ZeldaOLB\nTID: 0004000000997300\nLast Updated: 06/07/2017",
+    "title": "ZeldaOLB"
+}, {
+    "links": ["/dl/70/6529198/FidgetSpinner3DS.cia", "https://github.com/BEPISMAN2/FidgetSpinner3DS"],
+    "projectInfo": "Description: FidgetSpinner3DS\nTID: 0004000000426900\nLast Updated: 05/29/2017",
+    "title": "FidgetSpinner3DS"
+}, {
+    "links": ["/dl/256/6374131/Multidownload.cia", "https://github.com/hax0kartik/Multidownload"],
+    "projectInfo": "Description: multidownload++ - Download files straight onto your 3ds!\nTID: 0004000000103000\nLast Updated: 05/14/2017",
+    "title": "multidownload++"
+}, {
+    "links": ["/dl/64/6259991/DSP1.cia", "https://github.com/zoogie/DSP1"],
+    "projectInfo": "Description: DSP1 - dsp firm dumper\nTID: 0004000000d59100\nLast Updated: 05/03/2017",
+    "title": "DSP1"
+}, {
+    "links": ["/dl/101/6157848/LumaLocaleSwitcher-0.04-NIGHTLY.cia", "https://github.com/Possum/LumaLocaleSwitcher"],
+    "projectInfo": "Description: Luma Locale Switcher\nTID: 000400000a0ca100\nLast Updated: 04/22/2017",
+    "title": "Luma Locale Switcher"
+}, {
+    "links": ["/dl/203/6100035/WITB_3D.cia", "https://github.com/Manurocker95/WITB_3D"],
+    "projectInfo": "Description: Whats in the box 3D\nTID: 000400000fac2c00\nLast Updated: 04/17/2017",
+    "title": "Whatss in the box 3D"
+}, {
+    "links": ["/dl/128/5917039/Orchestrina.cia", "https://github.com/EBLeifEricson/orchestrina"],
+    "projectInfo": "Description: Orchestrina - Zelda Instrument Player\nTID: 000400000f102000\nLast Updated: 03/30/2017",
+    "title": "Orchestrina"
+}, {
+    "links": ["/dl/178/5838329/Supertux.cia", "https://github.com/nop90/Supertux-Milestone1-3ds"],
+    "projectInfo": "Description: Supertux\nTID: 0004000000998200\nLast Updated: 03/22/2017",
+    "title": "Supertux"
+}, {
+    "links": ["/dl/127/5712813/Opentyrian.cia", "https://github.com/nop90/Opentyrian-3ds"],
+    "projectInfo": "Description: Opentyrian\nTID: 0004000000997e00\nLast Updated: 03/11/2017",
+    "title": "Opentyrian"
+}, {
+    "links": ["/dl/206/5707604/Xrick.cia", "https://github.com/nop90/Xrick-3ds"],
+    "projectInfo": "Description: Xrick\nTID: 0004000000997d00\nLast Updated: 03/10/2017",
+    "title": "Xrick"
+}, {
+    "links": ["/dl/169/5256442/snakes.cia", "https://github.com/DDews/Snakes"],
+    "projectInfo": "Description: v0.2.5.2\nTID: 0004000009034200\nLast Updated: 02/14/2017",
+    "title": "Snakes"
+}, {
+    "links": ["/dl/27/5434428/3ds1010.cia", "https://github.com/LiquidFenrir/3ds1010"],
+    "projectInfo": "Description: Port of the 1010! mobile game to the 3ds\nTID: 0004000003d17000\nLast Updated: 02/12/2017",
+    "title": "3ds1010"
+}, {
+    "links": ["/dl/82/5432895/GriffonLegend.cia", "https://github.com/nop90/Griffon-Legend-3DS"],
+    "projectInfo": "Description: GriffonLegend\nTID: 0004000000998000\nLast Updated: 02/12/2017",
+    "title": "GriffonLegend"
+}, {
+    "links": ["/dl/59/5394416/CTRXplorer.cia", "https://github.com/d0k3/CTRXplorer"],
+    "projectInfo": "Description: CTRXplorer - Open source SD File Browser.\nTID: 0004000000287000\nLast Updated: 02/08/2017",
+    "title": "CTRXplorer"
+}, {
+    "links": ["/dl/140/5357841/Powder.cia", "https://github.com/nop90/POWDER-3DS"],
+    "projectInfo": "Description: POWDER\nTID: 0004000000997b00\nLast Updated: 02/03/2017",
+    "title": "POWDER"
+}, {
+    "links": ["/dl/147/5346705/r3Ddragon.cia", "https://github.com/mrdanielps/r3Ddragon"],
+    "projectInfo": "Description: r3Ddragon\nTID: 000400000fe7cb00\nLast Updated: 02/02/2017",
+    "title": "r3Ddragon"
+}, {
+    "links": ["/dl/164/5280746/SmashAmiiboCheatTool.cia", "https://github.com/Ordim3n/Smash-Amiibo-Cheat-Tool"],
+    "projectInfo": "Description: Smash Amiibo Cheat Tool\nTID: 000400000a7fc800\nLast Updated: 01/26/2017",
+    "title": "Smash Amiibo Cheat Tool"
+}, {
+    "links": ["/dl/177/5270520/SuperHaxagon.cia", "https://github.com/RedInquisitive/Super-Haxagon"],
+    "projectInfo": "Description: Super Haxagon - A Super Hexagon Clone\nTID: 000400000099aa00\nLast Updated: 01/26/2017",
+    "title": "Super Haxagon"
+}, {
+    "links": ["/dl/173/5230563/SpecializeMii.cia", "https://github.com/phijor/SpecializeMii"],
+    "projectInfo": "Description: SpecializeMii - Make Miis Special\nTID: 000400000f3d9900\nLast Updated: 01/22/2017",
+    "title": "SpecializeMii"
+}, {
+    "links": ["/dl/138/5128726/Pocket-NLSE.cia", "https://github.com/dragos240/Pocket-NLSE"],
+    "projectInfo": "Description: Pocket-NLSE\nTID: 000400000cce2e00\nLast Updated: 01/11/2017",
+    "title": "Pocket-NLSE"
+}, {
+    "links": ["/dl/190/5093787/tikSweep.cia", "https://github.com/DanTheMan827/tikSweep"],
+    "projectInfo": "Description: tikSweep - Remove unused tickets\nTID: 0004000000a8bf00\nLast Updated: 01/07/2017",
+    "title": "tikSweep"
+}, {
+    "links": ["/dl/209/5049015/ZeldaPicross.cia", "https://github.com/nop90/ZeldaPicross"],
+    "projectInfo": "Description: ZeldaPicross\nTID: 0004000000998100\nLast Updated: 01/02/2017",
+    "title": "ZeldaPicross"
+}, {
+    "links": ["/dl/81/4825064/GraphCalc3DS.cia", "https://github.com/flarn2006/GraphCalc3DS"],
+    "projectInfo": "Description: Graphing Calculator\nTID: 000400000f718300\nLast Updated: 12/03/2016",
+    "title": "Graphing Calculator"
+}, {
+    "links": ["/dl/148/4608501/ravimid.cia", "https://github.com/Hoksy/ravimid"],
+    "projectInfo": "Description: ravimid\nTID: 000400000a55c100\nLast Updated: 11/08/2016",
+    "title": "ravimid"
+}, {
+    "links": ["/dl/107/4384385/Memory3DS.cia", "https://github.com/Omegadrien/Memory3DS"],
+    "projectInfo": "Description: A 3DS memory game!\nTID: 00040000060aa100\nLast Updated: 10/13/2016",
+    "title": "Memory 3DS"
+}, {
+    "links": ["/dl/153/4209438/RomFSExplorer.cia", "https://github.com/Ryuzaki-MrL/RomFS-Explorer"],
+    "projectInfo": "Description: RomFS Explorer - RomFS file explorer\nTID: 000400000a1b2c00\nLast Updated: 09/22/2016",
+    "title": "RomFS Explorer"
+}, {
+    "links": ["/dl/58/4113603/ctrQuake.cia", "https://github.com/masterfeizz/ctrQuake"],
+    "projectInfo": "Description: ctrQuake\nTID: 000400000ff12300\nLast Updated: 09/13/2016",
+    "title": "ctrQuake"
+}, {
+    "links": ["/dl/46/3986232/CaptureAssistant.cia", "https://github.com/ItsDeidara/CaptureAssistant"],
+    "projectInfo": "Description: Capture Card Alignment Assistant\nTID: 0004000000686200\nLast Updated: 08/26/2016",
+    "title": "CaptureCorrection"
+}, {
+    "links": ["/dl/126/3748511/OpenSyobon3DS.cia", "https://github.com/nop90/OpenSyobon3DS"],
+    "projectInfo": "Description: OpenSyobon3DS\nTID: 0004000000997100\nLast Updated: 07/27/2016",
+    "title": "OpenSyobon3DS"
+}, {
+    "links": ["/dl/66/3725793/easyrpg-updater-re-v2.1.1.cia", "https://github.com/gnmmarechal/easyrpgdlre"],
+    "projectInfo": "Description: Updater for EasyRPG Player 3DS\nTID: 0004000000a54400\nLast Updated: 07/23/2016",
+    "title": "EasyRPG Updater: RE"
+}, {
+    "links": ["/dl/205/3634833/Worldof3DSand.cia", "https://github.com/Steveice10/WorldOf3DSand"],
+    "projectInfo": "Description: World of 3DSand - World of Sand for the 3DS.\nTID: 000400000f800200\nLast Updated: 07/12/2016",
+    "title": "World of 3DSand"
+}, {
+    "links": ["/dl/31/3626708/3ds-vgmstream.cia", "https://github.com/TricksterGuy/3ds-vgmstream"],
+    "projectInfo": "Description: 3ds-vgmstream\nTID: 0004000003daa300\nLast Updated: 07/11/2016",
+    "title": "3ds-vgmstream"
+}, {
+    "links": ["/dl/84/3610041/Hax0r.cia", "https://github.com/TurtleP/Hax0r"],
+    "projectInfo": "Description: Hax0r\nTID: 0004000000d39a00\nLast Updated: 07/07/2016",
+    "title": "Hax0r"
+}, {
+    "links": ["/dl/38/3579659/Biniax2.cia", "https://github.com/nop90/Biniax2-3DS"],
+    "projectInfo": "Description: Biniax2\nTID: 0004000000997800\nLast Updated: 07/04/2016",
+    "title": "Biniax2"
+}, {
+    "links": ["/dl/195/3556125/TurtleInvaders.cia", "https://github.com/TurtleP/TurtleInvaders"],
+    "projectInfo": "Description: Turtle: Invaders\nTID: 000400000f5acd00\nLast Updated: 06/30/2016",
+    "title": "Turtle: Invaders"
+}, {
+    "links": ["/dl/168/3459326/Snake2DS.cia", "https://github.com/Jacudibu/Snake2DS"],
+    "projectInfo": "Description: Snake2DS\nTID: 0004000000104300\nLast Updated: 06/16/2016",
+    "title": "Snake2DS"
+}, {
+    "links": ["/dl/197/3990533/TWLSaveTool.cia", "https://github.com/TuxSH/TWLSaveTool"],
+    "projectInfo": "Description: TWLSaveTool\nTID: 000400000f0def00\nLast Updated: 06/16/2016",
+    "title": "TWLSaveTool"
+}, {
+    "links": ["/dl/57/3452716/ctroller.cia", "https://github.com/phijor/ctroller"],
+    "projectInfo": "Description: ctroller\nTID: 000400000f3d5c00\nLast Updated: 06/15/2016",
+    "title": "ctroller"
+}, {
+    "links": ["/dl/210/3424718/ZeldaROTH.cia", "https://github.com/nop90/ZeldaROTH"],
+    "projectInfo": "Description: ZeldaROTH\nTID: 0004000000997200\nLast Updated: 06/11/2016",
+    "title": "ZeldaROTH"
+}, {
+    "links": ["/dl/123/3294258/NotifyMii.cia", "https://github.com/Ryuzaki-MrL/NotifyMii"],
+    "projectInfo": "Description: NotifyMii\nTID: 000400000ed99000\nLast Updated: 05/24/2016",
+    "title": "NotifyMii"
+}, {
+    "links": ["/dl/23/3281574/install.cia", "https://github.com/kenji-1996/3DS-Multi-Hex"],
+    "projectInfo": "Description: 3DS Multi Hex\nTID: 000400000ffadd00\nLast Updated: 05/23/2016",
+    "title": "3DS Multi Hex"
+}, {
+    "links": ["/dl/24/3250856/3DSQuickReboot.cia", "https://github.com/Asellus/3DS_Quick_Reboot"],
+    "projectInfo": "Description: 3DS Quick Reboot\nTID: 000400000f002300\nLast Updated: 05/18/2016",
+    "title": "3DS Quick Reboot"
+}, {
+    "links": ["/dl/65/3179357/EDuke3D.cia", "https://github.com/masterfeizz/EDuke3D"],
+    "projectInfo": "Description: Duke Nukem 3D\nTID: 000400000ff12400\nLast Updated: 05/08/2016",
+    "title": "Duke Nukem 3D"
+}, {
+    "links": ["/dl/54/3074251/cspsp.cia", "https://github.com/machinamentum/CS3DS"],
+    "projectInfo": "Description: Counter Strike PSP Port\nTID: 000400000f1bad00\nLast Updated: 04/22/2016",
+    "title": "CS3DS"
+}, {
+    "links": ["/dl/62/3036197/DrawAttack.cia", "https://github.com/Cruel/DrawAttack"],
+    "projectInfo": "Description: Multiplayer drawing battle game.\nTID: 0004000000771800\nLast Updated: 04/17/2016",
+    "title": "DrawAttack"
+}, {
+    "links": ["/dl/68/2753403/fbwo.cia", "https://github.com/Spaqin/fbwo-3ds"],
+    "projectInfo": "Description: Falling Blocks Watch Out\nTID: 0004000000fa6500\nLast Updated: 03/06/2016",
+    "title": "Falling Blocks Watch Out"
+}, {
+    "links": ["/dl/200/2465616/UpdateSuppressor.cia", "https://github.com/GiantBlargg/UpdateSuppressor"],
+    "projectInfo": "Description: Update Suppressor\nTID: 0004000001f50400\nLast Updated: 01/21/2016",
+    "title": "Update Suppressor"
+}, {
+    "links": ["/dl/79/2330996/GameYob.cia", "https://github.com/Steveice10/GameYob"],
+    "projectInfo": "Description: GameYob - (Super) GameBoy (Color) emulator.\nTID: 000400000f800300\nLast Updated: 12/23/2015",
+    "title": "GameYob"
+}, {
+    "links": ["/dl/139/1979267/pdrpse.cia", "https://github.com/suloku/pdrpse"],
+    "projectInfo": "Description: pdrpse\nTID: 000400000f885f00\nLast Updated: 10/18/2015",
+    "title": "Pokemon Dream Radar Save Editor"
+}, {
+    "links": ["/dl/183/1930470/Tetris3DS.cia", "https://github.com/UltiNaruto/Tetris3DS"],
+    "projectInfo": "Description: Tetris 3DS\nTID: 0004000006ffff00\nLast Updated: 10/08/2015",
+    "title": "Tetris 3DS"
+}, {
+    "links": ["/dl/20/1573469/3DSController.cia", "https://github.com/CTurt/3DSController"],
+    "projectInfo": "Description: 3DS Controller\nTID: 000400000f0fc200\nLast Updated: 09/08/2015",
+    "title": "3DS Controller"
+}, {
+    "links": ["/dl/91/1543097/music_player.cia", "https://github.com/machinamentum/music_player"],
+    "projectInfo": "Description: My Game\nTID: 000400000f0bad00\nLast Updated: 07/15/2015",
+    "title": "Homebrew Game"
+}, {
+    "links": ["/dl/15/842023/2048-3D.cia", "https://github.com/MrJPGames/2048-3D"],
+    "projectInfo": "Description: 2048 3D\nTID: 000400000ffcfc00\nLast Updated: 01/01/2015",
+    "title": "2048 3D"
+}]

@@ -4,6 +4,7 @@ namespace HomebrewSpace\Controllers;
 
 use HomebrewSpace\BaseController;
 use HomebrewSpace\DatabaseManager;
+use HomebrewSpace\Models\Application;
 
 class APIController extends BaseController {
     
@@ -40,14 +41,14 @@ class APIController extends BaseController {
                 unset($applications[$key]['author']);
                 unset($applications[$key]['description']);
                                          
-                $this->returnJson(['success' => true, 'result' => $applications[$key]]);
+                return ['success' => true, 'result' => $applications[$key]];
             }
         }
-        $this->returnJson(['success' => false]);
+        return ['success' => false];
     }
 
     public function appsAction() {
-        $stmt = null;
+        /*$stmt = null;
         if (isset($_REQUEST['app_id'])) {
             $stmt = DatabaseManager::Prepare('select app.*, GROUP_CONCAT(app_categories.category_id) as categories from app left join app_categories on (app_categories.app_id = app.id) where app.state = 1 and app.id = :app_id group by app.id');
             $stmt->bindValue('app_id', intval($_REQUEST['app_id']));
@@ -56,23 +57,23 @@ class APIController extends BaseController {
             $stmt->bindValue('category_id', intval($_REQUEST['category_id']));
         } else {
             $stmt = DatabaseManager::Prepare('select app.*, GROUP_CONCAT(app_categories.category_id) as categories from app left join app_categories on (app_categories.app_id = app.id) where app.state = 1 group by app.id');
-        }
+        }*/
 
-        $stmt->execute();
-        $applications = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        //$stmt->execute();
+        $applications = [];// $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $applicationsAPIData = [];
         foreach($applications as $key => $currentApplication) {
             $applications[$key]['url'] = '/app/' . $currentApplication['id'] . '-' . mb_strtolower($currentApplication['name']);
 
-            $stmt = DatabaseManager::Prepare('select * from app_releases where app_id = :app_id order by prerelease asc, created_at desc limit 1');
+            /*$stmt = DatabaseManager::Prepare('select * from app_releases where app_id = :app_id order by prerelease asc, created_at desc limit 1');
             $stmt->bindValue('app_id', $currentApplication['id']);
-            $stmt->execute();
-            $newestRelease = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $stmt->execute();*/
+            $newestRelease = [];//should be Application $stmt->fetch(\PDO::FETCH_ASSOC);
 
-            $stmt = DatabaseManager::Prepare('select * from app_releases where app_id = :app_id and prerelease = 0 order by created_at asc');
+            /*$stmt = DatabaseManager::Prepare('select * from app_releases where app_id = :app_id and prerelease = 0 order by created_at asc');
             $stmt->bindValue('app_id', $currentApplication['id']);
-            $stmt->execute();
-            $releases = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $stmt->execute();*/
+            $releases = [];//$stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             $applicationsAPIDataEntry = [
                 "id" => intval($currentApplication['id']),
@@ -90,15 +91,15 @@ class APIController extends BaseController {
                     'version' => $currentRelease['tag_name'],
                     'size' => intval($currentRelease['size']),
                     'titleid' => $currentRelease['titleid'],
-                    //Yes the url shouldnt be static but I wanted to get this done quickly for now :)
-                    'download_url' => 'https://tinydb.eiphax.tech/dl/'.intval($currentApplication['id']).'/'.intval($currentRelease['id']).'/'.$currentRelease['file_name']
+                    //@TODO: Properly build download_url
+                    'download_url' => 'http://localhost/dl/'.intval($currentApplication['id']).'/'.intval($currentRelease['id']).'/'.$currentRelease['file_name']
                 ];
             }
 
             $applicationsAPIData[] = $applicationsAPIDataEntry;
         }
 
-        $this->returnJson($applicationsAPIData);
+        return $applicationsAPIData;
     }
 
     public function categoriesAction() {
@@ -117,12 +118,6 @@ class APIController extends BaseController {
             $allCategories[$key]['id'] = intval($allCategories[$key]['id']);
             $allCategories[$key]['count'] = intval($allCategories[$key]['count']);
         }
-        $this->returnJson($allCategories);
-    }
-
-    private function returnJson($object) {
-        header('Content-Type: application/json');
-        echo json_encode($object);
-        exit;
+        return $allCategories;
     }
 }

@@ -12,81 +12,37 @@ class HomeController extends BaseController {
 
     protected function getViewData($categoryId, $title) {
         $applications = Application::FindAll();
-        return [
-            'title' => "Applications in Category \"" . $title . "\"",
-            "applications" => $applications
-        ];
-        /*
-        $stmt = null;
-        if ($categoryId == 1 || $categoryId == -1) {
-            $stmt = DatabaseManager::Prepare("select app.*, app_releases.name from app join app_releases on (app_releases.id = (select ap.id from app_releases ap where ap.app_id = app.id order by ap.prerelease asc, ap.created_at desc limit 1)) where app.state = 1 order by app_releases.created_at desc");
-        } else {
-            $stmt = DatabaseManager::Prepare('select app.*, app_releases.name from app join app_releases on (app_releases.id = (select ap.id from app_releases ap where ap.app_id = app.id order by ap.prerelease asc, ap.created_at desc limit 1)) join app_categories on (app_categories.app_id = app.id) where app.state = 1 and app_categories.category_id = :category_id group by app.id order by app_releases.created_at desc');
-            $stmt->bindValue(':category_id', $categoryId);
-        }
-
-        $stmt->execute();
-        $applications = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        $applicationsWithReleases = [];
-        foreach($applications as $key => $currentApplication) {
-            $applications[$key]['url'] = '/app/' . $currentApplication['id'] . '-' . mb_strtolower($currentApplication['name']);
-
-            $stmt = DatabaseManager::Prepare('select * from app_releases where app_id = :app_id order by prerelease asc, created_at desc limit 1');
-            $stmt->bindValue('app_id', $currentApplication['id']);
-            $stmt->execute();
-            $release = $stmt->fetch(\PDO::FETCH_ASSOC);
-
-            if ($release !== false) {
-                $applications[$key]['newest_release'] = $release;
-                $applicationsWithReleases[$key] = $applications[$key];
-            }
-        }
-
-        $applications = $applicationsWithReleases;
-
-        return [
-            'title' => "Applications in Category \"" . $title . "\"",
-            "applications" => $applications
-        ];*/
+        $applications = array_map(function ($currentApplicationData) {
+            $rawData = (new Application($currentApplicationData['_id'], $currentApplicationData['_source']))->GetRawData();
+            unset($rawData['releases']);
+            return $rawData;
+        }, $applications['hits']['hits']);
+        return $applications;
     }
 
-    public function indexAction() {
+    public function indexAction($request, $reponse) {
         return $this->getViewData(1, "All");
     }
 
-    public function searchAction() {
+    public function searchAction($request, $response) {
         $page = isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : '';
         $urlSegments = array_values(array_filter(explode('/', $page)));
 
-        $searchQuery = '';
-        if (count($urlSegments) > 1)
-            $searchQuery = $urlSegments[1];
-
-        $stmt = DatabaseManager::Prepare('select app.*, count(*) as "count" from app join app_categories on (app_categories.app_id = app.id) where app.state = 1 and (app.name like :search_term OR app.description like :search_term OR app.author like :search_term) group by app.id');
-        $stmt->bindValue('search_term', '%'.$searchQuery.'%');
-        $stmt->execute();
-        $applications = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        $applicationsWithReleases = [];
-        foreach($applications as $key => $currentApplication) {
-            $applications[$key]['url'] = '/app/' . $currentApplication['id'] . '-' . mb_strtolower($currentApplication['name']);
-
-            $stmt = DatabaseManager::Prepare('select * from app_releases where app_id = :app_id order by prerelease asc, created_at desc limit 1');
-            $stmt->bindValue('app_id', $currentApplication['id']);
-            $stmt->execute();
-            $release = $stmt->fetch(\PDO::FETCH_ASSOC);
-
-            if ($release !== false) {
-                $applications[$key]['newest_release'] = $release;
-                $applicationsWithReleases[$key] = $applications[$key];
-            }
+        $page = $request->server['request_uri'];
+        $page = array_filter(explode('?', $page))[0];
+        $urlSegments = array_values(array_filter(explode('/', $page)));
+        if (count($urlSegments) < 2) {
+            $response->status = 404;
         }
+        $searchQuery =  $urlSegments[1] . '?';
 
-        $applications = $applicationsWithReleases;
-
-        return [
-            'title' => "Search Results for \"" . $searchQuery . "\"",
-            "applications" => $applications
-        ];
+        $applications = Application::FindAll($searchQuery);
+        $applications = array_map(function ($currentApplicationData) {
+            $rawData = (new Application($currentApplicationData['_id'], $currentApplicationData['_source']))->GetRawData();
+            unset($rawData['releases']);
+            return $rawData;
+        }, $applications['hits']['hits']);
+        return $applications;
     }
 
     public function creditsAction() {

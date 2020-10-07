@@ -1,6 +1,6 @@
 FROM php:7.4-cli
 
-RUN apt-get update && apt-get install vim -y && \
+RUN apt-get update  && apt-get install vim -y && \
     apt-get install openssl -y && \
     apt-get install libssl-dev -y && \
     apt-get install wget -y && \
@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install vim -y && \
     apt-get install htop -y && \
     apt-get install npm -y
 
-RUN apt-get install -y \
+RUN apt-get install -y  \
     libzip-dev \
     zip \
   && docker-php-ext-install zip
@@ -31,6 +31,10 @@ RUN chmod +x /usr/local/bin/dumb-init
 
 RUN apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && apt-get install -y libmagickwand-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
+RUN printf "\n" | pecl install imagick
+RUN docker-php-ext-enable imagick
+
 ADD ./api /code
 WORKDIR /code
 
@@ -40,4 +44,4 @@ RUN cd /code && \
     php -r "unlink('composer-setup.php');" && \
     php composer.phar install
 
-ENTRYPOINT ["/usr/local/bin/dumb-init", "--", "php", "server.php"]
+ENTRYPOINT ["/usr/local/bin/dumb-init", "--", "php", "-d", "memory_limit=4G", "server.php"]

@@ -15,7 +15,7 @@ class Router {
         $this->twigEnvironment = $twigEnvironment;
     }
 
-    private function getController($request) {
+    private function getController($request, $reponse) {
         $page = $request->server['request_uri'];
         $page = array_filter(explode('?', $page))[0];
         $targetRoute = ['Home', 'index'];
@@ -24,6 +24,9 @@ class Router {
 
         if (count($urlSegments) > 0) {
             switch ($urlSegments[0]) {
+                case 'application':
+                    $targetRoute = ['Applications', 'detail'];
+                    break;
                 case 'submit':
                     $targetRoute = ['Submission', 'form'];
                     break;
@@ -81,12 +84,12 @@ class Router {
     /**
      * @param $dbManager DatabaseManager
      */
-    public function process($request) {
-        $controllerAction = $this->getController($request);
+    public function process($request, $response) {
+        $controllerAction = $this->getController($request, $response);
 
         $controllerClassName = "\\HomebrewSpace\\Controllers\\" . $controllerAction[0] . "Controller";
         /** @var BaseController $controllerInstance */
         $controllerInstance = new $controllerClassName($this);
-        return $controllerInstance->process($controllerAction[1]); //@TODO: Pass Request info somehow
+        return $controllerInstance->process($request, $response, $controllerAction[1]); //@TODO: Pass Request info somehow
     }
 }
