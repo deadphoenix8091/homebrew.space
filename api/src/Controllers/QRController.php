@@ -26,6 +26,7 @@ class QRController extends BaseController {
             $response->end($data);
         } else {
             $response->status = 404;
+            $response->end("");
         }
     }
 }
