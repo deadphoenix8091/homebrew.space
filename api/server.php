@@ -20,7 +20,6 @@ Swoole\Timer::set(array(
     'enable_coroutine' => TRUE
 ));
 
-
 $callbackArray = [];
 $updateTimer = function () use (&$callbackArray) {
     try {

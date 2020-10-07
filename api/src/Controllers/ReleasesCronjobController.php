@@ -103,6 +103,8 @@ class ReleasesCronjobController extends BaseController {
     public static function run() {
         $nextApplication = Application::GetNextForUpdate();
         
+        if (!$nextApplication) return ['failed'];
+        
         if ($nextApplication->last_updated >= microtime(true) - 60 * 60) {
             printf("Releases cronjob is idle.\n");
             return;
