@@ -105,7 +105,7 @@ class ReleasesCronjobController extends BaseController {
         
         if (!$nextApplication) return ['failed'];
         
-        if ($nextApplication->last_updated >= microtime(true) - 60 * 60 || count($nextApplication->releases) < 1) {
+        if ($nextApplication->last_updated >= microtime(true) - 60 * 60 && count($nextApplication->releases) >= 1) {
             printf("Releases cronjob is idle.\n");
             return;
         }
