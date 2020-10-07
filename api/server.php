@@ -69,7 +69,8 @@ $http->on('request', function ($request, $response) use ($twig) {
     $router = new \HomebrewSpace\Router($twig);
     $response->header("Content-Type", "application/json");
     $response->header('Access-Control-Allow-Origin', '*');
-    $response->end($router->process($request, $reponse));
+    
+    $response->end($router->process($request, $response));
 });
 
 $http->start();

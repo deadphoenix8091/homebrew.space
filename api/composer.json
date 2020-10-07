@@ -5,7 +5,8 @@
         "twig/twig": "^3.0",
         "symfony/yaml": "^5.0",
         "swoole/ide-helper": "@dev",
-        "ruflin/elastica": "^7.0"
+        "ruflin/elastica": "^7.0",
+        "chillerlan/php-qrcode": "^4.2"
     },
     "autoload": {
         "psr-4": {
