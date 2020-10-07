@@ -7,7 +7,7 @@ use HomebrewSpace\DatabaseManager;
 use HomebrewSpace\Models\Application;
 
 class QRController extends BaseController {
-    public function indexAction($request, $response) {
+    public function indexAction($request, \Swoole\Http\Response $response) {
         $page = $request->server['request_uri'];
         $page = array_filter(explode('?', $page))[0];
         $urlSegments = array_values(array_filter(explode('/', $page)));
@@ -27,6 +27,5 @@ class QRController extends BaseController {
         } else {
             $response->status = 404;
         }
-        return Application::Get($urlSegments[1])->GetRawData();// $this->getViewData(1, "All");
     }
 }

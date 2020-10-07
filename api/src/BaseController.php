@@ -24,10 +24,15 @@ abstract class BaseController {
         $actionMethodName = $actionName . "Action";
         $viewData = $this->$actionMethodName($request, $response);
         if (!is_array($viewData)) {
-            $viewData = [$viewData];
+            return;
         }
+
+        $response->header("Content-Type", "application/json");
+        $response->header('Access-Control-Allow-Origin', '*');
+        
+        $response->end(json_encode($viewData));
         //$viewData = array_merge($viewData, TemplateGlobals::BuildGlobals());
-        return json_encode($viewData);
+        return;
     }
 
     public function Redirect($targetUrl) {
